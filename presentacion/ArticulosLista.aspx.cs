@@ -13,9 +13,32 @@ namespace presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Creamos el Objeto listador y cargamos la gridview, luego usaremos Session y comentaremos como objetivo de repaso
             ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvPokemonsLista.DataSource = negocio.listarConSP();
-            dgvPokemonsLista.DataBind();
+            //dgvPokemonsLista.DataSource = negocio.listarConSP();
+            Session.Add("ListaArticulos", negocio.listarConSP());
+            dgvArticulosLista.DataSource = Session["ListaArticulos"];
+            dgvArticulosLista.DataBind();
         }
+
+        // SelectedIndexChanged evento cuando hacemos clic en modificar
+        protected void dgvArticulosLista_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var id = dgvArticulosLista.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioArticulo.aspx?Id=" + id, false);
+        }
+        
+        // PageIndexChanging evento que se dispara cuando hacemos clic en el boton de pagina siguiente
+        protected void dgvArticulosLista_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvArticulosLista.PageIndex = e.NewPageIndex;
+            dgvArticulosLista.DataBind();
+        }
+
+        
+
+
+        
+
     }
 }

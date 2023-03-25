@@ -28,7 +28,10 @@
                                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/">Listado</a>
+                                <a class="nav-link" href="ArticulosLista.aspx">Listado</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="FormularioArticulo.aspx">Formulario</a>
                             </li>
                         </ul>
                     </div>

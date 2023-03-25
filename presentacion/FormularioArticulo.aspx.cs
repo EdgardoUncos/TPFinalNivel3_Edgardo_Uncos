@@ -46,6 +46,7 @@ namespace presentacion
                         txtCodigo.Text = seleccionado.Codigo.ToString();
                         txtNombre.Text = seleccionado.Nombre;
                         txtDescripcion.Text = seleccionado.Descripcion;
+                        txtPrecio.Text = seleccionado.Precio.ToString();
                         txtImagenUrl.Text = seleccionado.UrlImagen;
                         imgArticulo.ImageUrl = seleccionado.UrlImagen;
 
@@ -66,6 +67,34 @@ namespace presentacion
         protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
         {
             imgArticulo.ImageUrl = txtImagenUrl.Text;
+        }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            Articulo nuevo = new Articulo();
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            try
+            {
+                nuevo.Codigo = txtCodigo.Text;
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.Descripcion = txtDescripcion.Text;
+                nuevo.UrlImagen = txtImagenUrl.Text;
+                nuevo.Precio = Decimal.Parse(txtPrecio.Text);
+                nuevo.Marca = new Tipo();
+                nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
+                nuevo.Categoria = new Tipo();
+                nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+
+                negocio.agregar(nuevo);
+                Response.Redirect("ArticulosLista.aspx", false);
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex);
+            }
         }
     }
 }

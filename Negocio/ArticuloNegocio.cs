@@ -152,15 +152,17 @@ namespace Negocio
         }
 
 
-
+        // Falta agregar Codigo urlImagen 
         public void agregar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("insert into ARTICULOS (Nombre, Descripcion, Precio, IdMarca, IdCategoria) values ('"+nuevo.Nombre+"','"+nuevo.Descripcion+"', "+nuevo.Precio+" , @idMarca, @idCategoria )");
+                datos.setearConsulta("insert into ARTICULOS (Nombre, Descripcion, Precio, IdMarca, IdCategoria, Codigo, ImagenUrl) values ('"+nuevo.Nombre+"','"+nuevo.Descripcion+"', "+nuevo.Precio+" , @idMarca, @idCategoria, @codigo, @urlimagen )");
                 datos.setearParametro("@idMarca", nuevo.Marca.Id);
                 datos.setearParametro("@idCategoria", nuevo.Categoria.Id);
+                datos.setearParametro("@urlimagen", nuevo.UrlImagen);
+                datos.setearParametro("@codigo", nuevo.Codigo);
                 datos.ejecutarAccion();
 
             }

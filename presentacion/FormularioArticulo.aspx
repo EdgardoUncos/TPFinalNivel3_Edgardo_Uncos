@@ -29,12 +29,21 @@
                 <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-select">
                 </asp:DropDownList>
             </div>
+            <div class="mb-3">
+                <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-primary" OnClick="btnAceptar_Click" runat="server" />
+                <a class="btn btn-primary">Cancelar</a>
+            </div>
+
         </div>
 
         <div class="col-6">
             <div class="mb-3">
                 <label class="form-label">Descripcion</label>
                 <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Precio</label>
+                <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" />
             </div>
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">

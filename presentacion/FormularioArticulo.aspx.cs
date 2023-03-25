@@ -76,8 +76,9 @@ namespace presentacion
 
             try
             {
-                nuevo.Codigo = txtCodigo.Text;
+                
                 nuevo.Nombre = txtNombre.Text;
+                nuevo.Codigo = txtCodigo.Text;
                 nuevo.Descripcion = txtDescripcion.Text;
                 nuevo.UrlImagen = txtImagenUrl.Text;
                 nuevo.Precio = Decimal.Parse(txtPrecio.Text);
@@ -86,10 +87,20 @@ namespace presentacion
                 nuevo.Categoria = new Tipo();
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
-                negocio.agregar(nuevo);
-                Response.Redirect("ArticulosLista.aspx", false);
+                if (string.IsNullOrEmpty(txtId.Text))
+                {//negocio.agregar(nuevo);
+                    negocio.agregarConSP(nuevo);
+                }
+                else
+                {
+                    nuevo.Id = int.Parse(txtId.Text);
+                    negocio.modificarConSP(nuevo);
+                }
 
+                Response.Redirect("ArticulosLista.aspx", false);
             }
+
+            
             catch (Exception ex)
             {
 

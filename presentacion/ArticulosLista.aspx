@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <h1>Lista de Articulos</h1>
     <asp:gridview runat="server" ID="dgvArticulosLista" CssClass="table table-dark" AutoGenerateColumns="false" 
         OnSelectedIndexChanged="dgvArticulosLista_SelectedIndexChanged" DataKeyNames="Id" AllowPaging="true" PageSize="5" OnPageIndexChanging="dgvArticulosLista_PageIndexChanging" >
         <Columns>
@@ -14,4 +15,8 @@
             <asp:CommandField ShowSelectButton="true" HeaderText="Accion" SelectText="Modificar" />
         </Columns>
     </asp:gridview>
+    <div class="mt-3">
+        <a class="btn btn-primary" href="FormularioArticulo.aspx">Agregar</a>
+    </div>
+
 </asp:Content>

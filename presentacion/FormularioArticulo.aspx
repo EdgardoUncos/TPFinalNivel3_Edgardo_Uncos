@@ -34,6 +34,24 @@
                 <a class="btn btn-primary">Cancelar</a>
             </div>
 
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="mb-3">
+                        <asp:Button Text="Eliminar" ID="bntEliminar" OnClick="bntEliminar_Click" CssClass="btn btn-danger" runat="server" />
+                    </div>
+
+                    <%if (ConfirmaEliminacion)
+                        { %>
+                    <div>
+                        <asp:CheckBox Text="Confirma Eliminacion" ID="chkConfirmaEliminacion" AutoPostBack="true" OnCheckedChanged="chkConfirmaEliminacion_CheckedChanged" runat="server" />
+                        <asp:Button Text="Eliminar" ID="btnConfirmaEliminacion" OnClick="btnConfirmaEliminacion_Click" CssClass="btn btn-outline-danger" runat="server" />
+                    </div>
+                    <%} %>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
+
         </div>
 
         <div class="col-6">
@@ -45,7 +63,7 @@
                 <label class="form-label">Precio</label>
                 <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" />
             </div>
-            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <div class="mb-3">

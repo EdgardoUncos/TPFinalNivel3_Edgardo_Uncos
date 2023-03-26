@@ -11,8 +11,10 @@ namespace presentacion
 {
     public partial class FormularioArticulo : System.Web.UI.Page
     {
+        public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            ConfirmaEliminacion = false;
             txtId.Enabled = false;
             try
             {
@@ -34,11 +36,14 @@ namespace presentacion
                     ddlCategoria.DataValueField = "Id";
                     ddlCategoria.DataBind();
 
+                    // Si hay un Id en la Url entonces tengo un Articulo para mostrar en el formulario
                     if (Request.QueryString["Id"] != null)
                     {
+                        //Seleccciono el Id y los busco desde la Session o Podria buscarlo desde la BD
                         int id = int.Parse(Request.QueryString["Id"].ToString());
-                        List<Articulo> temporal = (List<Articulo>)Session["ListaArticulos"];
-                        Articulo seleccionado = temporal.Find(x => x.Id == id);
+                        List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+                        Articulo seleccionado = ListaArticulos.Find(x => x.Id == id);
+                        Session.Add("seleccionado", seleccionado);
 
                         //Carga de los controles
                         
@@ -53,6 +58,8 @@ namespace presentacion
                         // Selecciono los desplegables
                         ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
                         ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
+
+                        
                     }
                 }
             }
@@ -105,6 +112,30 @@ namespace presentacion
             {
 
                 Session.Add("error", ex);
+            }
+        }
+
+        protected void bntEliminar_Click(object sender, EventArgs e)
+        {
+            ConfirmaEliminacion = true;
+        }
+
+        
+        protected void chkConfirmaEliminacion_CheckedChanged(object sender, EventArgs e)
+        {
+            ConfirmaEliminacion = chkConfirmaEliminacion.Checked;
+        }
+
+        protected void btnConfirmaEliminacion_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            if (chkConfirmaEliminacion.Checked)
+            {
+                //negocio.eliminar(int.Parse(Request.QueryString["Id"]));
+                //negocio.eliminar(((Articulo)Session["seleccionado"]).Id);
+                negocio.eliminar(int.Parse(txtId.Text));
+                Response.Redirect("ArticulosLista.aspx", false);
             }
         }
     }

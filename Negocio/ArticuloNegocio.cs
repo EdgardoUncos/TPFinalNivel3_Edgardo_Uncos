@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using Dominio;
 
 
+
 namespace Negocio
 {
     public class ArticuloNegocio
@@ -208,7 +209,7 @@ namespace Negocio
             }
         }
 
-        
+              
         public void modificar(Articulo seleccionado)
         {
             AccesoDatos datos = new AccesoDatos();

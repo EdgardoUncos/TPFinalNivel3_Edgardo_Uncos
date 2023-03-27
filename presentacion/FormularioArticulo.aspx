@@ -70,7 +70,10 @@
                         <label for="txtImagenUrl" class="form-label">Url Imagen</label>
                         <asp:TextBox runat="server" ID="txtImagenUrl" AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged" CssClass="form-control" />
                     </div>
-                    <asp:Image ImageUrl="https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png" ID="imgArticulo" Width="60%" runat="server" />
+                    <div style="height:300px;">
+                        <asp:Image ImageUrl="https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png" ID="imgArticulo" Width="60%" runat="server" />
+                    </div>
+
                 </ContentTemplate>
             </asp:UpdatePanel>
 

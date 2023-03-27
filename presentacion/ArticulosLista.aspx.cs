@@ -11,14 +11,21 @@ namespace presentacion
 {
     public partial class ArticulosLista : System.Web.UI.Page
     {
+        public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Creamos el Objeto listador y cargamos la gridview, luego usaremos Session y comentaremos como objetivo de repaso
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            //dgvPokemonsLista.DataSource = negocio.listarConSP();
-            Session.Add("ListaArticulos", negocio.listarConSP());
-            dgvArticulosLista.DataSource = Session["ListaArticulos"];
-            dgvArticulosLista.DataBind();
+            FiltroAvanzado = chkFiltroAvanzado.Checked;
+
+            if(!IsPostBack)
+            {
+                // Creamos el Objeto listador y cargamos la gridview, luego usaremos Session y comentaremos como objetivo de repaso
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                //dgvPokemonsLista.DataSource = negocio.listarConSP();
+                Session.Add("ListaArticulos", negocio.listarConSP());
+                dgvArticulosLista.DataSource = Session["ListaArticulos"];
+                dgvArticulosLista.DataBind();
+            }
+
         }
 
         // SelectedIndexChanged evento cuando hacemos clic en modificar
@@ -35,10 +42,67 @@ namespace presentacion
             dgvArticulosLista.DataBind();
         }
 
-        
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = txtFiltro.Text;
+            List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
 
+            List<Articulo> Filtrada = ListaArticulos.FindAll(x => x.Codigo.ToUpper().Contains(filtro.ToUpper()) 
+            || x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            // cargamos en la grid la nueva lista, luego se podria hacer en una funcion
+            dgvArticulosLista.DataSource = Filtrada;
+            dgvArticulosLista.DataBind();
+        }
 
-        
+        protected void chkFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFiltroAvanzado.Checked)
+            {
+                txtFiltro.Enabled = false;
+                FiltroAvanzado = true;
+            }
+            else
+            {
+                txtFiltro.Enabled = true;
+                FiltroAvanzado = false;
+            }
+        }
 
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ddlCampo.SelectedItem.Value.ToString() == "Codigo")
+            {
+                ddlCriterio.Items.Clear();
+                ddlCriterio.Items.Add("Comienza con");
+                ddlCriterio.Items.Add("Termina con");
+                ddlCriterio.Items.Add("Contiene");
+            }
+            else
+            {
+                ddlCriterio.Items.Clear();
+                ddlCriterio.Items.Add("Comienza con");
+                ddlCriterio.Items.Add("Termina con");
+                ddlCriterio.Items.Add("Contiene");
+            }
+
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string campo = ddlCampo.SelectedItem.Value.ToString();
+                string criterio = ddlCriterio.SelectedItem.Value.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                dgvArticulosLista.DataSource = negocio.filtrar(campo, criterio, filtro);
+                dgvArticulosLista.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex.ToString());
+            }
+        }
     }
 }

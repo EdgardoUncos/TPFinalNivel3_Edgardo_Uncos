@@ -46,7 +46,8 @@ namespace presentacion
                         Session.Add("seleccionado", seleccionado);
 
                         //Carga de los controles
-                        
+
+                        btnAceptar.Text = "Modificar";
                         txtId.Text = seleccionado.Id.ToString();
                         txtCodigo.Text = seleccionado.Codigo.ToString();
                         txtNombre.Text = seleccionado.Nombre;

@@ -208,6 +208,7 @@ namespace Negocio
             }
         }
 
+        
         public void modificar(Articulo seleccionado)
         {
             AccesoDatos datos = new AccesoDatos();

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using Negocio;
 
 namespace presentacion
 {
@@ -16,14 +17,42 @@ namespace presentacion
             User usuario = Session["usuario"] != null ? (User)Session["usuario"] : null;
             if(!(usuario != null && usuario.Id != 0) )
                     Response.Redirect("Login.aspx", false);
-                
+
+            if(!IsPostBack)
+            {
+                txtEmail.Text = usuario.Email;
+                imgNuevoPerfil.ImageUrl = usuario.UrlImagenPerfil != null ? "~/Images/" + usuario.UrlImagenPerfil : "";
+            }
             
             
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //Capturamos el usuario de la session y lo casteamos
 
+                User usuario = (User)Session["usuario"];
+                UsuarioNegocio negocio = new UsuarioNegocio();
+
+                //escribir la imagen
+                string ruta = Server.MapPath("./Images/");
+                txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuario.Id + ".jpg");
+
+                usuario.UrlImagenPerfil = "perfil-" + usuario.Id + ".jpg";
+                negocio.actualizar(usuario);
+
+                //leer la imagen
+                Image img = (Image) Master.FindControl("imgAvatar");
+                img.ImageUrl = "~/Images/" + usuario.UrlImagenPerfil;
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
+using Dominio;
 
 namespace presentacion
 {
@@ -19,6 +20,12 @@ namespace presentacion
                     Response.Redirect("Login.aspx", false);
             }
 
+            if (Seguridad.SessionActiva(Session["usuario"]))
+                imgAvatar.ImageUrl = "~/Images/" + ((User)Session["usuario"]).UrlImagenPerfil;
+            else
+                imgAvatar.ImageUrl = "https://simg.nicepng.com/png/small/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png";
+
+            
         }
 
         protected void btnSalir_Click(object sender, EventArgs e)

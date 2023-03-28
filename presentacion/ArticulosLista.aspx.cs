@@ -15,7 +15,7 @@ namespace presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             //Validamos el ingreso a la pagina - Para que sea mas optimo habria que validar en la master
-            if ((User)Session["usuario"] != null && ((User)Session["usuario"]).Id != 0)
+            if (!((User)Session["usuario"] != null && ((User)Session["usuario"]).Id != 0))
                 Response.Redirect("Login.aspx", false);
 
             FiltroAvanzado = chkFiltroAvanzado.Checked;

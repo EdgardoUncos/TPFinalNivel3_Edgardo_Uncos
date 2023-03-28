@@ -48,7 +48,7 @@
                             { %>
                         <asp:Button Text="Salir" ID="btnSalir" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" runat="server" />
                         <asp:Image ID="imgAvatar" style="height: 40px; width: 40px; border-radius: 50%;"
-                            ImageUrl="https://simg.nicepng.com/png/small/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" runat="server" />
+                            ImageUrl="" runat="server" />
                         <%} %>
                     </div>
                 </div>

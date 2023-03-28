@@ -14,7 +14,7 @@
                 <asp:TextBox runat="server" ID="txtPassWord" CssClass="form-control" />
             </div>
             <div class="mb-3">
-                <asp:button text="Ingresar" ID="btnLogin" runat="server" OnClick="btnLogin_Click" />
+                <asp:button text="Ingresar" ID="btnLogin" CssClass="btn btn-primary" runat="server" OnClick="btnLogin_Click" />
             </div>
         </div>
     </div>

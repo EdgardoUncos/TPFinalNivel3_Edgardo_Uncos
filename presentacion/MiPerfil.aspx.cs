@@ -14,11 +14,16 @@ namespace presentacion
         {
             //Validamos en el page load, para no validar en todas las paginas habria que validar en la master
             User usuario = Session["usuario"] != null ? (User)Session["usuario"] : null;
-            if(!(usuario != null))
-                    Response.Redirect("Login.apx", false);
+            if(!(usuario != null && usuario.Id != 0) )
+                    Response.Redirect("Login.aspx", false);
                 
             
             
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -25,7 +25,8 @@ namespace presentacion
             
             try
             {
-                negocio.insertarNuevoUsuario(usuario);
+                usuario.Id = negocio.insertarNuevoUsuario(usuario);
+                Session.Add("usuario", usuario);
                 email.enviarCorreo();
                 Response.Redirect("Default.aspx", false);
             }

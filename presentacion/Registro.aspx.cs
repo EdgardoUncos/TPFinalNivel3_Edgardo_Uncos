@@ -20,9 +20,13 @@ namespace presentacion
         {
             User usuario = new User(txtEmail.Text, txtPassWord.Text, false);
             UsuarioNegocio negocio = new UsuarioNegocio();
+            EmailService email = new EmailService();
+            email.armarCorreo(usuario.Email, "Registro Pagina", "Bienvenido fuiste registrado como usuario normal");
+            
             try
             {
                 negocio.insertarNuevoUsuario(usuario);
+                email.enviarCorreo();
                 Response.Redirect("Default.aspx", false);
             }
             catch (Exception ex)

@@ -21,6 +21,8 @@ namespace presentacion
             if(!IsPostBack)
             {
                 txtEmail.Text = usuario.Email;
+                txtNombre.Text = usuario.Nombre;
+                txtApellido.Text = usuario.Apellido;
                 imgNuevoPerfil.ImageUrl = usuario.UrlImagenPerfil != null ? "~/Images/" + usuario.UrlImagenPerfil : "";
             }
             
@@ -37,10 +39,18 @@ namespace presentacion
                 UsuarioNegocio negocio = new UsuarioNegocio();
 
                 //escribir la imagen
-                string ruta = Server.MapPath("./Images/");
-                txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuario.Id + ".jpg");
+                if(txtImagen.PostedFile.FileName != "")
+                {
+                    string ruta = Server.MapPath("./Images/");
+                    txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuario.Id + ".jpg");
+                    usuario.UrlImagenPerfil = "perfil-" + usuario.Id + ".jpg";
+                }
 
-                usuario.UrlImagenPerfil = "perfil-" + usuario.Id + ".jpg";
+                // Guardar los datos de las cajas de texto
+                usuario.Nombre = txtNombre.Text;
+                usuario.Apellido = txtApellido.Text;
+                usuario.FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+
                 negocio.actualizar(usuario);
 
                 //leer la imagen
@@ -53,6 +63,8 @@ namespace presentacion
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
+
+
         }
     }
 }

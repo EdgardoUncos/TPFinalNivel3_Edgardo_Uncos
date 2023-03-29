@@ -45,10 +45,10 @@ namespace Negocio
                 {
                     usuario.Id = (int)datos.Lector["Id"];
                     usuario.Admin = (bool)datos.Lector["admin"];
-                    if (!(datos.Lector["Nombre"] is DBNull))
-                        usuario.Nombre = (string)datos.Lector["Nombre"];
-                    if (!(datos.Lector["Apellido"] is DBNull))
-                        usuario.Apellido = (string)datos.Lector["Apellido"];
+                    if (!(datos.Lector["nombre"] is DBNull))
+                        usuario.Nombre = (string)datos.Lector["nombre"];
+                    if (!(datos.Lector["apellido"] is DBNull))
+                        usuario.Apellido = (string)datos.Lector["apellido"];
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.UrlImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
                     return true;
@@ -71,8 +71,10 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Update USERS Set urlImagenPerfil = @url Where Id = @id");
-                datos.setearParametro("@url", usuario.UrlImagenPerfil);
+                datos.setearConsulta("Update USERS Set urlImagenPerfil = @url, nombre = @nombre, apellido = @apellido,   Where Id = @id");
+                datos.setearParametro("@url", usuario.UrlImagenPerfil != null ? usuario.UrlImagenPerfil : "");
+                datos.setearParametro("@nombre", usuario.Nombre);
+                datos.setearParametro("@apellido", usuario.Apellido);
                 datos.setearParametro("@id", usuario.Id);
 
                 datos.ejecutarAccion();

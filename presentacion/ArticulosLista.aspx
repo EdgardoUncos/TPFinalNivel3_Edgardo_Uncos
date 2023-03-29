@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <%if (FiltroAvanzado)
+            <%if (chkFiltroAvanzado.Checked)
                 { %>
             <div class="row">
                 <div class="col-3">

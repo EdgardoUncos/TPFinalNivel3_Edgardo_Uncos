@@ -7,7 +7,7 @@
         <div class="col-4">
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" TextMode="Password" />
+                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
@@ -24,7 +24,7 @@
         </div>
         <div class="col-4">
             <div class="mb-3">
-                <label class="form-label">Fecha de Nacimiento</label>
+                <label class="form-label">Imagen de Perfil</label>
                 <input type="file" class="form-control" runat="server" id="txtImagen" />    
             </div>
             <asp:Image ID="imgNuevoPerfil" ImageUrl="https://www.palomacornejo.com/wp-content/uploads/2021/08/no-image.jpg" runat="server" CssClass="img-fluid mb-3" />

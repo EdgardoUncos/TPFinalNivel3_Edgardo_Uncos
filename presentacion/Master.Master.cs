@@ -14,7 +14,7 @@ namespace presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             //Validamos en la master 
-            if (!(Page is Login || Page is Registro || Page is Default))
+            if (!(Page is Login || Page is Registro))
             {
                 if (!Seguridad.SessionActiva(Session["usuario"]))
                     Response.Redirect("Login.aspx", false);

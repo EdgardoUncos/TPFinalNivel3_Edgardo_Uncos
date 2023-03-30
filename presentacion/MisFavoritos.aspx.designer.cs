@@ -11,7 +11,7 @@ namespace presentacion
 {
 
 
-    public partial class Favoritos
+    public partial class MisFavoritos
     {
 
         /// <summary>

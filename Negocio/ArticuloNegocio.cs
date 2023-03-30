@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using Dominio;
+using dominio;
 
 
 
-namespace Negocio
+namespace negocio
 {
     public class ArticuloNegocio
     {
@@ -409,6 +409,43 @@ namespace Negocio
                 }
                 return lista;
 
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
+
+        public List<Favoritos> listar2()
+        {
+            List<Favoritos> lista = new List<Favoritos>();
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Select Id, IdUser, IdArticulo From Favoritos");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Favoritos aux = new Favoritos();
+                    if(!(datos.Lector["Id"] is DBNull))
+                        aux.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["IdUser"] is DBNull))
+                        aux.IdUser = (int)datos.Lector["IdUser"];
+                    
+                    if (!(datos.Lector["IdArticulo"] is DBNull))
+                        aux.IdArticulo = (int)datos.Lector["IdArticulo"];
+                    
+
+                    lista.Add(aux);
+
+                }
+                datos.cerrarConexion();
+                return lista;
             }
             catch (Exception ex)
             {

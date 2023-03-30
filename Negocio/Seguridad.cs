@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dominio;
-using Negocio;
+using dominio;
 
-namespace Negocio
+
+namespace negocio
 {
     public static class Seguridad
     {

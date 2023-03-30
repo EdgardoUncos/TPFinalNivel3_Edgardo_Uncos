@@ -383,5 +383,40 @@ namespace Negocio
         }
 
 
+
+
+    }
+
+    public class FavoritosNegocio
+    {
+        public List<Favoritos> ListarFavoritos()
+        {
+            List<Favoritos> lista = new List<Favoritos>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Select Id, IdUser, IdArticulo From Favoritos");
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Favoritos aux = new Favoritos();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.IdArticulo = (int)datos.Lector["IdArticulo"];
+                    aux.IdUser = (int)datos.Lector["IdUser"];
+                    lista.Add(aux);
+                }
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
     }
 }

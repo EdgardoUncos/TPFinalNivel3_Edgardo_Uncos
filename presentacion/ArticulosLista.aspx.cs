@@ -22,13 +22,13 @@ namespace presentacion
 
             if(!IsPostBack)
             {
+            }
                 // Creamos el Objeto listador y cargamos la gridview, luego usaremos Session y comentaremos como objetivo de repaso
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 //dgvPokemonsLista.DataSource = negocio.listarConSP();
                 Session.Add("ListaArticulos", negocio.listarConSP());
                 dgvArticulosLista.DataSource = Session["ListaArticulos"];
                 dgvArticulosLista.DataBind();
-            }
 
         }
 

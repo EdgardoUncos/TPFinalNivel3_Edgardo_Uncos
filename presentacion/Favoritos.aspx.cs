@@ -11,16 +11,19 @@ namespace presentacion
 {
     public partial class Favoritos : System.Web.UI.Page
     {
-        public List<Favoritos> ListaFavoritos { get; set; }
-        public List<Articulo> ListaArticulo { get; set; }
+        public List<Favoritos> UsuarioFavoritos { get; set; }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-            //FavoritosNegocio negocio = new FavoritosNegocio();
+            FavoritosNegocio negocio = new FavoritosNegocio();
+            Session.Add("listafavoritos", negocio.ListarFavoritos());
+            int id = ((User)Session["usuario"]).Id;
+            UsuarioFavoritos = ((List<Favoritos>)Session["listafavoritos"]);
+           
+
+            dgvFavoritos.DataBind();
             
 
-            //ArticuloNegocio negocio2 = new ArticuloNegocio();
-            //ListaArticulo = negocio2.listar2();
-            
         }
     }
 }

@@ -33,12 +33,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="FormularioArticulo.aspx">Formulario</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Favoritos.aspx">Favoritos</a>
+                            </li>
                         </ul>
                     </div>
 
                     <%--Agregamos los botones para login y registrarse, posicionamos a la derecha--%>
                     <div class="d-flex">
-                        <%if (!Negocio.Seguridad.SessionActiva(Session["usuario"]))
+                        <%if (!negocio.Seguridad.SessionActiva(Session["usuario"]))
                             { %>
                         <a href="Login.aspx" class="btn btn-success me-2">Login</a>
                         <a href="Registro.aspx" class="btn btn-outline-primary me-2">Registrarse</a>

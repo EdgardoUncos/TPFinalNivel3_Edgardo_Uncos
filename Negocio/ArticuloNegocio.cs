@@ -399,7 +399,7 @@ namespace negocio
                 datos.setearConsulta("Select Id, IdUser, IdArticulo From Favoritos");
                 datos.ejecutarLectura();
 
-                if (datos.Lector.Read())
+                while (datos.Lector.Read())
                 {
                     Favoritos aux = new Favoritos();
                     aux.Id = (int)datos.Lector["Id"];

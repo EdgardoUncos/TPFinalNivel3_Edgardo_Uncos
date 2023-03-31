@@ -83,5 +83,22 @@ namespace negocio
                 throw ex;
             }
         }
+
+        public void eliminar2(int idUsuario, int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Delete From FAVORITOS Where IdUser = @idUsuario AND IdArticulo = @idArticulo");
+                datos.setearParametro("@idUsuario", idUsuario);
+                datos.setearParametro("@idArticulo", idArticulo);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex; 
+            }
+        }
     }
 }

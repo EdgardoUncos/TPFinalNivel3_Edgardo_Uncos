@@ -17,5 +17,7 @@ namespace dominio
         public Tipo Categoria { get; set; }
 
         public decimal Precio { get; set; }
+
+        public List<Favoritos> ListaFavoritos { get; set; }
     }
 }

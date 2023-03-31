@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ArticulosLista.aspx" />
+    <Content Include="Css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="FormularioArticulo.aspx" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
+    <Folder Include="Js\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

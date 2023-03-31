@@ -2,9 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>Mis Favoritos</h2>
-    <div class="row">
+    <h2 class="text-center">Mis Favoritos</h2>
+    <%--<div class="row">
         <div class="col-12">
             <asp:GridView runat="server" ID="dgvFavoritos" AutoGenerateColumns="false" CssClass="table table-dark"
                 OnSelectedIndexChanged="dgvFavoritos_SelectedIndexChanged" DataKeyNames="Id">
@@ -15,7 +16,7 @@
                     <asp:CommandField HeaderText="Accion" SelectText="Eliminar" />
                 </Columns>
             </asp:GridView>
-        </div>
+        </div>--%>
 
         <div class="col-12">
             <asp:GridView runat="server" ID="dgvFavoritos2" AutoGenerateColumns="false" CssClass="table table-dark"

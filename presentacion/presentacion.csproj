@@ -73,6 +73,7 @@
     <Content Include="Error.aspx" />
     <Content Include="FormularioArticulo.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Js\script.js" />
     <Content Include="Login.aspx" />
     <Content Include="MiPerfil.aspx" />
     <Content Include="MisFavoritos.aspx" />
@@ -161,7 +162,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
-    <Folder Include="Js\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

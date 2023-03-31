@@ -14,42 +14,66 @@ namespace presentacion
         public List<Articulo> ListaArticulo { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            FavoritosNegocio negocio = new FavoritosNegocio();
-            ListaArticulo = (List<Articulo>)Session["ListaArticulos"];
-            List<Favoritos> ListaFavoritos = negocio.ListarFavoritos();
-            List<Articulo> ListaAP = new List<Articulo>();
-            int id = ((User)Session["usuario"]).Id;
-
-            foreach (var item in ListaFavoritos)
+            try
             {
-                if(id == item.IdUser)
-                    ListaAP.Add(ListaArticulo.Find(x => x.Id == item.IdArticulo));
-            }
-            dgvFavoritos2.DataSource = ListaAP;
-            dgvFavoritos2.DataBind();    
+                //Validamos en el page load, Porque la validacin de la master falla en esta pagina
+                User usuario = Session["usuario"] != null ? (User)Session["usuario"] : null;
+                if (!(usuario != null))
+                    Response.Redirect("Login.aspx");
 
-            if(!IsPostBack)
-            {
-                if(Request.QueryString["IdArticulo"]!= null)
+                ArticuloNegocio articulonegocio = new ArticuloNegocio();
+                FavoritosNegocio negocio = new FavoritosNegocio();
+
+                // si al ingresar al login viene directo a Mis Favoritos no existe aun en session la ListaArticulo
+                if (Session["ListaArticulos"] == null)
+                    Session.Add("ListaArticulos", articulonegocio.listar2());
+
+                ListaArticulo = (List<Articulo>)Session["ListaArticulos"];
+                List<Favoritos> ListaFavoritos = negocio.ListarFavoritos();
+                List<Articulo> ListaAP = new List<Articulo>();
+                int id = ((User)Session["usuario"]).Id;
+
+                foreach (var item in ListaFavoritos)
                 {
-                    
-                    Favoritos nuevo = new Favoritos();
-                    nuevo.IdUser = ((User)Session["usuario"]).Id;
-                    nuevo.IdArticulo = int.Parse(Request.QueryString["IdArticulo"]);
+                    if (id == item.IdUser)
+                        ListaAP.Add(ListaArticulo.Find(x => x.Id == item.IdArticulo));
+                }
+                dgvFavoritos2.DataSource = ListaAP;
+                dgvFavoritos2.DataBind();
 
-                    negocio.agregar(nuevo);
-                }    
+                if (!IsPostBack)
+                {
+                    if (Request.QueryString["IdArticulo"] != null)
+                    {
+
+                        Favoritos nuevo = new Favoritos();
+                        nuevo.IdUser = ((User)Session["usuario"]).Id;
+                        nuevo.IdArticulo = int.Parse(Request.QueryString["IdArticulo"]);
+
+                        negocio.agregar(nuevo);
+                    }
+                }
+
+                // grid view de prueba
+                //dgvFavoritos.DataSource = negocio.ListarFavoritos();
+                //dgvFavoritos.DataBind();
+
             }
-            dgvFavoritos.DataSource = negocio.ListarFavoritos();
-            dgvFavoritos.DataBind();
+            catch(System.Threading.ThreadAbortException ex) { }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
 
         }
 
         // Este metodo se ejecuta cuando seleccionamos la accion
-        protected void dgvFavoritos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int id = int.Parse(dgvFavoritos.SelectedDataKey.Value.ToString());
-        }
+        //protected void dgvFavoritos_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    int id = int.Parse(dgvFavoritos.SelectedDataKey.Value.ToString());
+        //}
 
         protected void dgvFavoritos2_SelectedIndexChanged(object sender, EventArgs e)
         {

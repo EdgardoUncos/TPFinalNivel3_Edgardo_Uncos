@@ -10,8 +10,8 @@
         <%foreach (dominio.Articulo item in ListaArticulos)
             {%>
         <div class="col">
-            <div class="card">
-                <img src="<%:item.UrlImagen %>" class="card-img-top" alt="..." />
+            <div class="card text-center">
+                <img src="<%:item.UrlImagen %>" class="card-img-top" onerror="this.src='Images/placeholder.png'" style="max-width: 250px; max-height: 250px; margin: auto;" alt="..." />
                 <div class="card-body">
                     <h5 class="card-title"><%:item.Nombre %></h5>
                     <p class="card-text"><%:item.Descripcion %></p>

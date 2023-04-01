@@ -33,5 +33,20 @@
             </asp:GridView>
         </div>
 
-    </div>
+        <div class="col-12">
+            <asp:GridView runat="server" ID="dgvFavoritos3" AutoGenerateColumns="false" CssClass="table table-dark"
+                OnSelectedIndexChanged="dgvFavoritos3_SelectedIndexChanged">
+                <Columns>
+                    <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
+                    <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                    <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+                    <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
+                    <asp:BoundField HeaderText="Categoria" DataField="Categoria.Descripcion" />
+                    <asp:BoundField HeaderText="Precio" DataField="Precio" />
+                    <asp:CommandField ShowSelectButton="true" HeaderText="Accion" SelectText="Eliminar" />
+                </Columns>
+            </asp:GridView>
+        </div>
+
+    
 </asp:Content>

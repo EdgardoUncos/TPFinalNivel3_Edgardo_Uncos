@@ -11,7 +11,7 @@ namespace presentacion
 {
     public partial class MisFavoritos : System.Web.UI.Page
     {
-        public List<Articulo> ListaArticulo { get; set; }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -28,17 +28,12 @@ namespace presentacion
                 if (Session["ListaArticulos"] == null)
                     Session.Add("ListaArticulos", articulonegocio.listar2());
 
-                ListaArticulo = (List<Articulo>)Session["ListaArticulos"];
+                
                 List<Favoritos> ListaFavoritos = negocio.ListarFavoritos();
-                List<Articulo> ListaAP = new List<Articulo>();
-                int id = ((User)Session["usuario"]).Id;
-
-                foreach (var item in ListaFavoritos)
-                {
-                    if (id == item.IdUser)
-                        ListaAP.Add(ListaArticulo.Find(x => x.Id == item.IdArticulo));
-                }
-                dgvFavoritos2.DataSource = ListaAP;
+                List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+                
+                // Hacemos una lista todos los productos para una determinado Id de usuario, Usando Las Lista levantadas en sesion
+                dgvFavoritos2.DataSource = Helper.ListaFavUser(usuario.Id, ListaArticulos, ListaFavoritos);
                 dgvFavoritos2.DataBind();
 
                 if (!IsPostBack)
@@ -57,6 +52,10 @@ namespace presentacion
                 // grid view de prueba
                 //dgvFavoritos.DataSource = negocio.ListarFavoritos();
                 //dgvFavoritos.DataBind();
+
+                //Configuracion grid3
+                List<ArticuloFavorito> listaAF;
+                dgvFavoritos3.DataSource = 
 
             }
             catch(System.Threading.ThreadAbortException ex) { }
@@ -83,6 +82,11 @@ namespace presentacion
             negocio.eliminar2(idUsuario, idArticulo);
 
             
+        }
+
+        protected void dgvFavoritos3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         //Para eliminar favoritos.

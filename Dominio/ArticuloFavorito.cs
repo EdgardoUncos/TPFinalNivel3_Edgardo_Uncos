@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    public class Articulo
+    public class ArticuloFavorito
     {
-        public int Id { get; set; }
+        public int IdFavorito { get; set; }
+        public int IdUser { get; set; }
+        public int IdArticulo { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -17,6 +19,5 @@ namespace dominio
         public Tipo Categoria { get; set; }
 
         public decimal Precio { get; set; }
-
     }
 }

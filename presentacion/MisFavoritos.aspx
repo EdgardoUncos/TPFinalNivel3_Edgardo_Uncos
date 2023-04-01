@@ -35,7 +35,7 @@
 
         <div class="col-12">
             <asp:GridView runat="server" ID="dgvFavoritos3" AutoGenerateColumns="false" CssClass="table table-dark"
-                OnSelectedIndexChanged="dgvFavoritos3_SelectedIndexChanged">
+                OnSelectedIndexChanged="dgvFavoritos3_SelectedIndexChanged" DataKeyNames="IdFavorito">
                 <Columns>
                     <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />

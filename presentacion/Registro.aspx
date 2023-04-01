@@ -2,19 +2,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row">
-        <div class="col-4">
-            <h2>Crea tu perfil</h2>
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <asp:TextBox runat="server" ID="txtPassWord" CssClass="form-control" />
-            </div>
-            <div class="mb-3">
-                <asp:Button Text="Registrarse" ID="btnRegistrarse" CssClass="btn btn-primary" OnClick="btnRegistrarse_Click" runat="server" />
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-md-8 col-xl-6">
+            <div class="border border-dark rounded rounded-3 p-4 mt-3">
+
+                <h2 class="display-4 mt-5 text-center">Crea tu perfil</h2>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <asp:TextBox runat="server" ID="txtEmail" ClientIDMode="Static" CssClass="form-control" />
+                    <asp:RequiredFieldValidator ErrorMessage="Email Requerido" ControlToValidate="txtEmail" runat="server" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <asp:TextBox runat="server" ID="txtPassWord" ClientIDMode="Static" CssClass="form-control" />
+                    <asp:RequiredFieldValidator ErrorMessage="Password Requerido" ControlToValidate="txtPassWord" runat="server" />
+                </div>
+                <div class="mb-3 text-center mt-3">
+                    <asp:Button Text="Registrarse" ID="btnRegistrarse" CssClass="btn btn-primary" OnClick="btnRegistrarse_Click" runat="server" />
+                </div>
+
             </div>
         </div>
     </div>

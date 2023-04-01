@@ -18,6 +18,10 @@ namespace presentacion
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
+
             User usuario = new User(txtEmail.Text, txtPassWord.Text, false);
             UsuarioNegocio negocio = new UsuarioNegocio();
             EmailService email = new EmailService();

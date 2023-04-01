@@ -33,6 +33,11 @@
                     <asp:Button Text="Ingresar" ID="btnLogin" CssClass="btn btn-primary" runat="server" OnClick="btnLogin_Click" OnClientClick="return validar()" />
                 </div>
             </div>
+
+            <div class="text-center mt-3">
+                <p class="form-label">No tenes cuenta</p>
+                <a class="btn btn-outline-primary" href="Registro.aspx">Registrate</a>
+            </div>
         </div>
 
 

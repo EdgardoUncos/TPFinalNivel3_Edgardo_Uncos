@@ -11,12 +11,12 @@
                 <div class="mb-3">
                     <label class="form-label">Email</label>
                     <asp:TextBox runat="server" ID="txtEmail" ClientIDMode="Static" CssClass="form-control" />
-                    <asp:RequiredFieldValidator ErrorMessage="Email Requerido" ControlToValidate="txtEmail" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Email Requerido" ControlToValidate="txtEmail" runat="server" Font-Size="Small" CssClass="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <asp:TextBox runat="server" ID="txtPassWord" ClientIDMode="Static" CssClass="form-control" />
-                    <asp:RequiredFieldValidator ErrorMessage="Password Requerido" ControlToValidate="txtPassWord" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Password Requerido" ControlToValidate="txtPassWord" runat="server" Font-Size="Small" CssClass="text-danger" />
                 </div>
                 <div class="mb-3 text-center mt-3">
                     <asp:Button Text="Registrarse" ID="btnRegistrarse" CssClass="btn btn-primary" OnClick="btnRegistrarse_Click" runat="server" />

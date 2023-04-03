@@ -11,7 +11,11 @@ namespace presentacion
 {
     public partial class MisFavoritos : System.Web.UI.Page
     {
-        
+        public void cargarGrid2(object data, object control)
+        {
+            ((GridView)control).DataSource = (List<Articulo>)data;
+            ((GridView)control).DataBind();
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -31,10 +35,12 @@ namespace presentacion
                 
                 List<Favoritos> ListaFavoritos = negocio.ListarFavoritos();
                 List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
-                
+
                 // Hacemos una lista todos los productos para una determinado Id de usuario, Usando Las Lista levantadas en sesion
-                dgvFavoritos2.DataSource = Helper.ListaFavUser(usuario.Id, ListaArticulos, ListaFavoritos);
-                dgvFavoritos2.DataBind();
+                Session.Add("ListaFavoritosxIdUsuario", Helper.ListaFavUser(usuario.Id, ListaArticulos, ListaFavoritos));
+                //dgvFavoritos2.DataSource = Session["ListaFavoritosxIdUsuario"];
+                //dgvFavoritos2.DataBind();
+                cargarGrid2(Session["ListaFavoritosxIdUsuario"], dgvFavoritos2);
 
                 if (!IsPostBack)
                 {
@@ -83,7 +89,7 @@ namespace presentacion
             FavoritosNegocio negocio = new FavoritosNegocio();
             int idUsuario = ((User)Session["usuario"]).Id;
             negocio.eliminar2(idUsuario, idArticulo);
-
+            cargarGrid2(Session["ListaFavoritosxIdUsuario"], dgvFavoritos2);
             
         }
 

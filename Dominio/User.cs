@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    
+    // Informacion de cada usuario para guardar en la base de datos.
     public class User
     {
         public int Id { get; set; }

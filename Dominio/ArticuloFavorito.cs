@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
+    // Clase, la informacion de los objetos vendran de una consulta joineada de sql o de la session
+    // la tabla Articulos y Favoritos
     public class ArticuloFavorito
     {
         public int IdFavorito { get; set; }

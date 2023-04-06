@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
+    // Informacion de la tabla favoritos
     public class Favoritos
     {
         public int Id { get; set; }

@@ -1,14 +1,87 @@
-﻿body {
-    }
-main{
-    min-height: 70vh;
+﻿body,
+html {
+    height: 100%;
+    min-height: 600px;
+    min-width: 800px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-footer{
-    min-height: 400px;
+html {
+    overflow: auto;
 }
 
-.seccion-oscura{
+form {
+    height: 100%;
+}
+
+.fill {
+    height: 100%;
+    width: 100%;
+    /*background-color: green;*/
+}
+
+.seccion-oscura {
     color: white;
     background-color: #1b1b32;
+    
 }
+
+.red-social-a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.red-social-i {
+    color: white;
+    font-size: 1.2rem;
+}
+
+/*Why isn't 100% height and 100% width working in my ASPX page?
+
+Your issue is that in your actual page .fill is contained within a form. This form has no height or width and is display: block; so it is taking up the full width of it's container (body) and using as much height as is required.
+
+You have a couple of options:
+
+Move the fill class to the form
+Add height: 100%; to the form to ensure it takes up 100% of the body height
+body,
+html {
+    height: 100%;
+    min-height: 600px;
+    min-width: 800px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow: auto;
+}
+
+form {
+    height: 100%;
+}
+
+.fill {
+    height: 100%;
+    width: 100%;
+    background-color: green;
+}
+
+<!DOCTYPE html >
+<html lang="en" >
+<body >
+<form runat="server" >
+<div id="div" class="fill" > Div</div >
+</form >
+</body >
+</html >*/

@@ -8,6 +8,10 @@
             <div class="border border-dark rounded rounded-3 p-4 mt-3">
 
                 <h2 class="display-4 mt-5 text-center">Crea tu perfil</h2>
+                <div class="d-flex justify-content-center align-items-center mt-2">
+                    <asp:ValidationSummary runat="server" CssClass="text-danger" Font-Size="Small" />
+                </div>
+
                 <div class="mb-3">
                     <label class="form-label">Email</label>
                     <asp:TextBox runat="server" ID="txtEmail" ClientIDMode="Static" CssClass="form-control" />

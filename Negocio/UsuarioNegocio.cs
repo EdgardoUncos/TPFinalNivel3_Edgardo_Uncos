@@ -10,6 +10,7 @@ namespace negocio
 {
     public class UsuarioNegocio
     {
+        // Insertamos en la Tabla User un registro con la info del objeto usuario
         public int insertarNuevoUsuario(User usuario)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -31,6 +32,7 @@ namespace negocio
             }
         }
 
+        // true si el usuario es admin y false si no lo es
         public bool Login(User usuario)
         {
             AccesoDatos datos = new AccesoDatos();

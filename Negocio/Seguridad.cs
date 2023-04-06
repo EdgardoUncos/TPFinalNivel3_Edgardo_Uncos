@@ -13,7 +13,8 @@ namespace negocio
         public static bool esAdmin(object user)
         {
             User usuario = user != null ? (User)user : null;
-            return usuario.Admin;
+
+            return usuario!=null? usuario.Admin : false;
         }
         public static bool SessionActiva(object user)
         {

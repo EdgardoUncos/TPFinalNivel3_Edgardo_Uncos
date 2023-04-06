@@ -60,6 +60,9 @@ namespace presentacion
                 if (!(usuario != null))
                     Response.Redirect("Login.aspx");
 
+
+
+
                 //------------------------------------------------------------------------------------
 
                 FavoritosNegocio negocio = new FavoritosNegocio();

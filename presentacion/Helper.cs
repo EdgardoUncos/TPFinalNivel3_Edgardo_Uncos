@@ -24,6 +24,7 @@ namespace presentacion
                                     
         }
 
+
         //public static List<ArticuloFavorito> ListarAF(int idUser, List<Articulo> ListaArticulos, List<Favoritos> ListaFavoritos)
         //{
         //    List<ArticuloFavorito> ListaAF = new List<ArticuloFavorito>();

@@ -15,8 +15,8 @@
                 <div class="card-body">
                     <h5 class="card-title"><%:item.Nombre %></h5>
                     <p class="card-text"><%:item.Descripcion %></p>
-                    <a href="MisFavoritos.aspx?IdArticulo=<%:item.Id %>" class="btn btn-danger">Agregar a Favoritos</a>
-                    <a href="Detalle.aspx?IdArticulo=<%:item.Id %>" class="btn btn-light" style="max-height: 300px;">Ver detalle</a>
+                    <a href="LosFavotitos.aspx?IdArticulo=<%:item.Id %>" class="btn btn-danger">Agregar a Favoritos</a>
+                    <a href="Detalle.aspx?IdProducto=<%:item.Id %>" class="btn btn-light" style="max-height: 300px;">Ver detalle</a>
                 </div>
             </div>
         </div>

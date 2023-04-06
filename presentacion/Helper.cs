@@ -24,6 +24,19 @@ namespace presentacion
                                     
         }
 
+        public static bool hayFavorito(int idArticulo, object lista)
+        {
+            List<Articulo> listaArticulos = (List<Articulo>)lista;
+
+            foreach (Articulo articulo in listaArticulos)
+            {
+                if (articulo.Id == idArticulo)
+                    return true;
+
+            }
+            return false;
+        }
+
 
         //public static List<ArticuloFavorito> ListarAF(int idUser, List<Articulo> ListaArticulos, List<Favoritos> ListaFavoritos)
         //{

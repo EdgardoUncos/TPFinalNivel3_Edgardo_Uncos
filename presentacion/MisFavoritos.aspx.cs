@@ -126,10 +126,8 @@ namespace presentacion
                 //dgvFavoritos.DataBind();
 
                 //Configuracion grid3
-                //ArticuloFavoritoNegocio negocio3 = new ArticuloFavoritoNegocio();
-                //List<ArticuloFavorito> listaAF = negocio3.listarArticulosFavoritos();
-                //dgvFavoritos3.DataSource = listaAF;
-                //dgvFavoritos3.DataBind();
+                
+
                  
 
             }

@@ -43,7 +43,7 @@
                                 <%if (negocio.Seguridad.SessionActiva(Session["usuario"]))
                                     {  %>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="MisFavoritos.aspx">Favoritos</a>
+                                    <a class="nav-link" href="LosFavoritos.aspx">Favoritos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>

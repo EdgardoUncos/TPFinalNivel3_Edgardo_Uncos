@@ -42,7 +42,7 @@
             </div>
 
     </div>
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-12 text-center">
             <a href="Default.aspx" class="btn btn-secondary">Regresar</a>
         </div>

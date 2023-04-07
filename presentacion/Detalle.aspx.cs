@@ -33,10 +33,10 @@ namespace presentacion
                 ddlCategoria.DataBind();
 
                 // Si hay un Id en la Url entonces tengo un Articulo para mostrar en el formulario
-                if (Request.QueryString["IdArticulo"] != null)
+                if (Request.QueryString["IdProducto"] != null)
                 {
                     //Seleccciono el Id y los busco desde la Session o Podria buscarlo desde la BD
-                    int id = int.Parse(Request.QueryString["IdArticulo"].ToString());
+                    int id = int.Parse(Request.QueryString["IdProducto"].ToString());
 
                     // Preguntamos si la ListaArticulos en session fue creada
                     if (Session["ListaArticulos"]== null)

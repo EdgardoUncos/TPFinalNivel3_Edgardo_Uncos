@@ -128,7 +128,10 @@ namespace negocio
 
                 }
                 datos.cerrarConexion();
-                return lista;
+                if(lista.Count > 0)
+                    return lista;
+
+                return null;
             }
             catch (Exception ex)
             {
@@ -137,5 +140,7 @@ namespace negocio
             }
 
         }
+
+
     }
 }

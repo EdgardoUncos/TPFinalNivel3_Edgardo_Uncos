@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="text-center mt-3">
+            <div class="text-center m-3">
                 <p class="form-label">No tenes cuenta</p>
                 <a class="btn btn-outline-primary" href="Registro.aspx">Registrate</a>
             </div>

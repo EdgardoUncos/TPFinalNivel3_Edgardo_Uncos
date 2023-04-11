@@ -56,13 +56,13 @@
                         <div class="d-flex">
                             <%if (!negocio.Seguridad.SessionActiva(Session["usuario"]))
                                 { %>
-                            <a href="Login.aspx" class="btn btn-success me-2">Login</a>
+                            <a href="Login.aspx" class="btn btn-primary me-2">Login</a>
                             <a href="Registro.aspx" class="btn btn-outline-primary me-2">Registrarse</a>
                             <div style="background-color: gray; height: 40px; width: 40px; border-radius: 50%;"></div>
                             <%}
                                 else
                                 { %>
-                            <asp:Button Text="Salir" ID="btnSalir" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" runat="server" />
+                            <asp:Button Text="Salir" ID="btnSalir" CssClass="btn btn-light me-2" OnClick="btnSalir_Click" runat="server" />
                             <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;"
                                 ImageUrl="" runat="server" />
                             <%} %>

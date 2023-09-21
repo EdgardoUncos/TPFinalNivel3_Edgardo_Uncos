@@ -22,11 +22,16 @@ Envio de emails
 
 <table>
     <tr> 
-        <td><img src="https://postimg.cc/CR675Ds4" width="100%" /></td>
-        <td><img src="https://i.postimg.cc/SxFSJVCQ/02.png" width="100%" /><td> 
+        <td><img src="https://i.postimg.cc/wB9GWQtn/login.jpg" width="100%" /></td>
+        <td><img src="https://i.postimg.cc/9M0bwxSt/Default.jpg" width="100%" /><td> 
     </tr>
     <tr> 
-        <td><img src="https://i.postimg.cc/bY5Njqvt/03.jpg" width="100%" /></td> 
-        <td><img src="https://i.postimg.cc/bY5Njqvt/03.jpg" width="100%" /></td>
+        <td><img src="https://i.postimg.cc/y8T2Fbfw/favoritos.jpg" width="100%" /></td> 
+        <td><img src="https://i.postimg.cc/7h7WbsGt/administracion.jpg" width="100%" /></td>
     </tr>
+    <tr> 
+        <td><img src="https://i.postimg.cc/SxVtXzR4/Miperfil.jpg" width="100%" /></td> 
+        
+    </tr>
+    
 </table>

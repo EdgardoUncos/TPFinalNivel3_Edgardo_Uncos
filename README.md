@@ -31,7 +31,7 @@ Envio de emails
     </tr>
     <tr> 
         <td><img src="https://i.postimg.cc/SxVtXzR4/Miperfil.jpg" width="100%" /></td> 
-        
+        <td></td>
     </tr>
     
 </table>

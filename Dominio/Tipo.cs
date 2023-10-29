@@ -10,6 +10,8 @@ namespace dominio
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
+        
+        // Sobreescribimos el metodo ToString para que retorne la descipción
         public override string ToString()
         {
             return Descripcion;

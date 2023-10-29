@@ -116,9 +116,12 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearProcedimiento("storedListar");
-                datos.ejecutarLectura();
+                //datos.setearProcedimiento("storedListar");
 
+                string consulta = "select A.Id, A.Codigo, Nombre, A.Descripcion, IdMarca, M.Descripcion Marca, IdCategoria, C.Descripcion AS Categoria, ImagenUrl, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C Where A.IdMarca = M.Id and A.IdCategoria = C.Id";
+                datos.setearConsulta(consulta);
+
+                datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
@@ -278,16 +281,16 @@ namespace negocio
             {
                 switch(criterio)
                 {
-                    case "Comineza con": 
-                        consulta += "A.Codigo like '" + filtro + "%' ";
+                    case "Comienza con": 
+                        consulta += "Codigo like '" + filtro + "%' ";
                         break;
 
                     case "Contiene":
-                        consulta += "A.Codigo like '%" + filtro + "%' ";
+                        consulta += "Codigo like '%" + filtro + "%' ";
                         break;
 
                     case "Termina con":
-                        consulta += "A.Codigo like '%" + filtro + "'";
+                        consulta += "Codigo like '%" + filtro + "'";
                         break;
 
                 }
@@ -296,7 +299,7 @@ namespace negocio
             {
                 switch(criterio)
                 {
-                    case "Comineza con":
+                    case "Comienza con":
                         consulta += "Nombre like '" + filtro + "%' ";
                         break;
 
@@ -347,6 +350,7 @@ namespace negocio
                     aux.Categoria = new Tipo();
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
 
                     listaFiltrada.Add(aux);
                 }

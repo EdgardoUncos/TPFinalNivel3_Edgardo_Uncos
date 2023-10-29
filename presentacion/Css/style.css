@@ -49,6 +49,10 @@ form {
     background-color: green;
 }
 
+.carrousel{
+    max-width: 200px;
+}
+
 /*Why isn't 100% height and 100% width working in my ASPX page?
 
 Your issue is that in your actual page .fill is contained within a form. This form has no height or width and is display: block; so it is taking up the full width of it's container (body) and using as much height as is required.

@@ -13,11 +13,14 @@ namespace presentacion
     {
         public List<Articulo> ListaArticulos { get; set; }
 
-        private void CargarRepeater()
+        private void CargarRepeater(object lista)
         {
-            repRepedidor.DataSource = Session["ListaArticulos"];
+            List<Articulo> listado = (List<Articulo>)lista;
+            repRepedidor.DataSource = listado;
             repRepedidor.DataBind();
         }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -28,11 +31,24 @@ namespace presentacion
                     ListaArticulos = negocio.listarConSP();
                     if (Session["ListaArticulos"] == null)
                         Session.Add("ListaArticulos", ListaArticulos);
-                    CargarRepeater();
+                    CargarRepeater(Session["ListaArticulos"]);
+
+                    TipoNegocio tipoNegocio = new TipoNegocio();
+                    ddlCategoria.DataSource = tipoNegocio.listarCategoria();
+                    ddlCategoria.SelectedIndex = -1;
+                    ddlCategoria.DataTextField = "Descripcion";
+                    ddlCategoria.DataValueField = "Id";
+                    ddlCategoria.DataBind();
+
+                    ddlMarca.DataSource = tipoNegocio.listarMarcas();
+                    ddlMarca.SelectedIndex = -1;
+                    ddlMarca.DataTextField = "Descripcion";
+                    ddlMarca.DataValueField = "Id";
+                    ddlMarca.DataBind();
                 }
-                     
-                
-                
+
+
+
 
             }
             catch (Exception ex)
@@ -44,26 +60,40 @@ namespace presentacion
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            List<Articulo> ListaFiltrada;
+            List<Articulo> ListaFiltrada = (List<Articulo>)Session["ListaArticulos"];
             List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+            try
+            {
+                //if (!string.IsNullOrEmpty(txtMinimo.Text))
+                //    if (!string.IsNullOrEmpty(txtMaximo.Text))
+                //        ListaFiltrada = ListaFiltrada.FindAll(x => x.Precio >= Decimal.Parse(txtMinimo.Text.ToString()) && x.Precio <= Decimal.Parse(txtMaximo.Text.ToString()));
+                //    else
+                //        ListaFiltrada = ListaFiltrada.FindAll(x => x.Precio >= Decimal.Parse(txtMinimo.Text.ToString()));
 
-            if (!string.IsNullOrEmpty(txtMinimo.Text))
-                if (!string.IsNullOrEmpty(txtMaximo.Text))
-                    ListaFiltrada = ListaArticulos.FindAll(x => x.Precio >= Decimal.Parse(txtMinimo.Text.ToString()) && x.Precio <= Decimal.Parse(txtMaximo.Text.ToString()));
-                else
-                    ListaFiltrada = ListaArticulos.FindAll(x => x.Precio >= Decimal.Parse(txtMinimo.Text.ToString()));
+                //else
+                //if (!string.IsNullOrEmpty(txtMaximo.Text))
+                //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Precio <= Decimal.Parse(txtMaximo.Text.ToString()));
 
-            else
-                if (!string.IsNullOrEmpty(txtMaximo.Text))
-                ListaFiltrada = ListaArticulos.FindAll(x => x.Precio >= Decimal.Parse(txtMinimo.Text.ToString()));
-            else
-                ListaFiltrada = ListaArticulos;
+                //string opcion = ddlMarca.SelectedItem.Text;
+                //if (opcion != "Filtrar Marca")
+                //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Marca.Descripcion == opcion);
 
-            Session.Add("ListaArticulos", ListaFiltrada);
+                //opcion = ddlCategoria.SelectedItem.Text;
+                //if (opcion != "Filtrar Categoria")
+                //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Categoria.Descripcion == opcion);
 
-            ListaArticulos = ListaFiltrada;
+                ListaFiltrada = Filtrar(ListaArticulos, txtMinimo.Text, txtMaximo.Text);
 
-            CargarRepeater();
+                ListaArticulos = ListaFiltrada;
+
+                CargarRepeater(ListaFiltrada);
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("Error.aspx", false);
+
+            }
+
         }
 
         protected void btnReiniciar_Click(object sender, EventArgs e)
@@ -71,12 +101,40 @@ namespace presentacion
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulos = negocio.listarConSP();
             Session.Add("ListaArticulos", ListaArticulos);
+            CargarRepeater(Session["ListaArticulos"]);
 
+            ddlMarca.SelectedIndex = 0;
+            ddlCategoria.SelectedIndex = 0;
         }
 
         protected void btnFavoritos_Click(object sender, EventArgs e)
         {
             string id = ((Button)sender).CommandArgument;
+        }
+
+        private List<Articulo> Filtrar(List<Articulo> lista, string precioMinimo, string precioMaximo)
+        {
+            List<Articulo> ListaFiltrada = lista;
+
+            if (!string.IsNullOrEmpty(precioMinimo))
+                if (!string.IsNullOrEmpty(precioMaximo))
+                    ListaFiltrada = lista.FindAll(x => x.Precio >= Decimal.Parse(precioMinimo.ToString()) && x.Precio <= Decimal.Parse(precioMaximo.ToString()));
+                else
+                    ListaFiltrada = lista.FindAll(x => x.Precio >= Decimal.Parse(precioMinimo.ToString()));
+
+            else
+                if (!string.IsNullOrEmpty(precioMaximo))
+                ListaFiltrada = lista.FindAll(x => x.Precio <= Decimal.Parse(precioMaximo.ToString()));
+
+            //string opcion = ddlMarca.SelectedItem.Text;
+            //if (opcion != "Filtrar Marca")
+            //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Marca.Descripcion == opcion);
+
+            //opcion = ddlCategoria.SelectedItem.Text;
+            //if (opcion != "Filtrar Categoria")
+            //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Categoria.Descripcion == opcion);
+
+            return ListaFiltrada;
         }
     }
 }

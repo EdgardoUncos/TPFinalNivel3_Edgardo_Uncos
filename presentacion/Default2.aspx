@@ -398,95 +398,42 @@
 
     <div class="content py-md-0 py-3">
         <section id="sidebar">
+            
             <div class="py-3">
-                <h5 class="font-weight-bold">Categories</h5>
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">vegetables <span class="badge badge-primary badge-pill">328</span> </li>
-                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">Fruits <span class="badge badge-primary badge-pill">112</span> </li>
-                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">Kitchen Accessories <span class="badge badge-primary badge-pill">32</span> </li>
-                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">Chefs Tips <span class="badge badge-primary badge-pill">48</span> </li>
-                </ul>
-            </div>
-            <div class="py-3">
-                <h5 class="font-weight-bold">Brands</h5>
+                <h5 class="font-weight-bold">Marca</h5>
                 <div class="brand">
-                    <div class="form-inline d-flex align-items-center py-1">
-                        <label class="tick">
-                            Royal Fields
-                            <input type="checkbox">
-                            <span class="check"></span>
-                        </label>
+                    
+
+                    <div>
+                        <asp:DropDownList runat="server" ID="ddlMarca" AppendDataBoundItems="true" CssClass="form-control">
+                            <asp:ListItem Value="Filtrar Marca"></asp:ListItem>
+                        </asp:DropDownList>
                     </div>
-                    <div class="form-inline d-flex align-items-center py-1">
-                        <label class="tick">
-                            Crasmas Fields
-                            <input type="checkbox" checked>
-                            <span class="check"></span>
-                        </label>
-                    </div>
-                    <div class="form-inline d-flex align-items-center py-1">
-                        <label class="tick">
-                            Vegetarisma Farm
-                            <input type="checkbox" checked>
-                            <span class="check"></span>
-                        </label>
-                    </div>
-                    <div class="form-inline d-flex align-items-center py-1">
-                        <label class="tick">
-                            Farmar Field Eve
-                            <input type="checkbox">
-                            <span class="check"></span>
-                        </label>
-                    </div>
-                    <div class="form-inline d-flex align-items-center py-1">
-                        <label class="tick">
-                            True Farmar Steve
-                            <input type="checkbox">
-                            <span class="check"></span>
-                        </label>
-                    </div>
+
+                    <h5 class="font-weight-bold">Categoría</h5>
+                    <asp:DropDownList runat="server" ID="ddlCategoria" AppendDataBoundItems="true" CssClass="form-control">
+                        <asp:ListItem Value="Filtrar Categoria"></asp:ListItem>
+                    </asp:DropDownList>
                 </div>
             </div>
-            <div class="py-3">
-                <h5 class="font-weight-bold">Rating</h5>
-                <div class="rating">
-                    <div class="form-inline d-flex align-items-center py-2">
-                        <label class="tick">
-                            <span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span>
-                            <input type="checkbox">
-                            <span class="check"></span>
-                        </label>
-                    </div>
-                    <div class="form-inline d-flex align-items-center py-2">
-                        <label class="tick">
-                            <span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="far fa-star px-1 text-muted"></span>
-                            <input type="checkbox">
-                            <span class="check"></span>
-                        </label>
-                    </div>
-                    <div class="form-inline d-flex align-items-center py-2">
-                        <label class="tick">
-                            <span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="far fa-star px-1 text-muted"></span><span class="far fa-star px-1 text-muted"></span>
-                            <input type="checkbox">
-                            <span class="check"></span>
-                        </label>
-                    </div>
-                    <div class="form-inline d-flex align-items-center py-2">
-                        <label class="tick">
-                            <span class="fas fa-star"></span><span class="fas fa-star"></span><span class="far fa-star px-1 text-muted"></span><span class="far fa-star px-1 text-muted"></span><span class="far fa-star px-1 text-muted"></span>
-                            <input type="checkbox">
-                            <span class="check"></span>
-                        </label>
-                    </div>
-                    <div class="form-inline d-flex align-items-center py-2">
-                        <label class="tick">
-                            <span class="fas fa-star"></span><span class="far fa-star px-1 text-muted"></span><span class="far fa-star px-1 text-muted"></span><span class="far fa-star px-1 text-muted"></span><span class="far fa-star px-1 text-muted"></span>
-                            <input type="checkbox">
-                            <span class="check"></span>
-                        </label>
-                    </div>
-                </div>
+
+            <div class="d-flex justify-content-evenly align-items-center">
+                <label class="form-label">Minimo</label>
+                <label class="form-label">Máximo</label>
             </div>
+
+            <div class="d-flex justify-content-evenly align-content-center">
+                <asp:TextBox runat="server" ID="txtMinimo" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtMaximo" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="d-flex justify-content-evenly align-items-center">
+                <asp:Button Text="Filtrar" runat="server" ID="btnFiltrar" OnClick="btnFiltrar_Click" CssClass="btn btn-light" />
+                <asp:Button Text="Reiniciar" runat="server" ID="btnReiniciar" OnClick="btnReiniciar_Click" CssClass="btn btn-light" />
+            </div>
+
+
+
         </section>
         <!-- Products Section -->
         <section id="products">
@@ -504,13 +451,16 @@
                                         <div class="d-flex align-items-center product"><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="far fa-star"></span></div>
                                         <div class="d-flex align-items-center justify-content-between pt-3">
                                             <div class="d-flex flex-column">
-                                                <div class="h6 font-weight-bold"><%#Eval("Precio") %> USD</div>
-                                                <div class="text-muted rebate">48.56</div>
+                                                <div class="h6 font-weight-bold"><%#Eval("Precio", "{0:F2}") %> USD</div>
+                                                
                                             </div>
-                                            <a class="btn btn-primary" href="Detalle.aspx?IdProducto=<%#Eval("Id") %>">Fav</a>
-                                        </div>
+                                            <a class="btn btn-primary" href="LosFavotitos.aspx?IdProducto=<%#Eval("Id") %>">Fav</a>
+                                            <div class="d-flex justify-content-center align-content-center">
+                                                <a class="btn btn-light" href="Detalle.aspx?IdProducto=<%#Eval("Id") %>">Detalle</a>
+                                            </div>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
@@ -520,7 +470,7 @@
 
 
             </div>
-    </section>
+        </section>
     </div>
 
 </asp:Content>

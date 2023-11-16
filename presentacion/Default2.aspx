@@ -34,13 +34,7 @@
                 color: #61b15a;
             }
 
-        .green-label {
-            background-color: #defadb;
-            color: #48b83e;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            margin: 0 3px;
-        }
+        
 
         .radio, .checkbox {
             padding: 6px 10px;
@@ -67,16 +61,7 @@
             opacity: 0;
         }
 
-        .checkmark {
-            position: absolute;
-            top: 0px;
-            left: 0;
-            height: 20px;
-            width: 20px;
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 50%;
-        }
+        
 
         .options input:checked ~ .checkmark:after {
             display: block;
@@ -396,9 +381,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="content py-md-0 py-3">
+    <div class="wrapper">
+        <div class="content py-md-0 py-3">
         <section id="sidebar">
-            
             <div class="py-3">
                 <h5 class="font-weight-bold">Marca</h5>
                 <div class="brand">
@@ -472,5 +457,7 @@
             </div>
         </section>
     </div>
+
+    </div>        
 
 </asp:Content>

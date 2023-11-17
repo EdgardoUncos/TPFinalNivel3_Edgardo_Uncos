@@ -84,7 +84,7 @@ namespace presentacion
 
             try
             {
-                
+                //Recogemos los valores del formulario y lo copiamos a un objeto Articulo
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Codigo = txtCodigo.Text;
                 nuevo.Descripcion = txtDescripcion.Text;
@@ -96,7 +96,9 @@ namespace presentacion
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
                 if (string.IsNullOrEmpty(txtId.Text))
-                {//negocio.agregar(nuevo);
+                {
+                    // Descomentar la linea de abajo en caso de no tener el procedimiento almacenado. Y comentar la linea agregarConSP
+                    //negocio.agregar(nuevo);
                     negocio.agregarConSP(nuevo);
                 }
                 else

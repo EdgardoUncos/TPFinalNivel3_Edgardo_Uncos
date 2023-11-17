@@ -14,7 +14,10 @@ namespace presentacion
         private List<Articulo> ListaArticulos; // Lista de articulos de la base de datos
         private List<Favoritos> ListaFavoritos;
         private List<Articulo> ListaFavoritosUsuario; // Lista que obtendremos de un procesamiento
-        
+
+        //Evento de Carga Page Load
+        // Creamos los obejtos Negocios necesarios, Si no es POstback, Si hay un IdProducto en la Url como Parametro, verificamos si esta logueado,  entonces agregamos el Art favorito.
+        //Si no estoy logueado y Si hay IdProducto en la Url. Entonces lo dejamos agregar favoritos en session como invitado, no guarda en BD
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -29,40 +32,7 @@ namespace presentacion
 
             if (!IsPostBack)
             {
-                //    //Preguntamos Si hay en Session ListaArticulos de todos los usuarios
-                //    if (Session["ListaArticulos"] == null)
-                //    {
-                //        ListaArticulos = negocioA.listar2();
-                //        Session.Add("ListaArticulos", ListaArticulos);
-                //    }
-
-                //    if (Request.QueryString["IdProducto"] != null)
-                //    {
-                //        int IdProducto = int.Parse(Request.QueryString["IdProducto"].ToString());
-
-                //        // Preguntamos si hay un usuario logeado.
-                //        if (Seguridad.SessionActiva(Session["usuario"]))
-                //        {
-                //            int IdUser = ((User)Session["Usuario"]).Id;
-                //            if(!Helper.hayFavorito(IdProducto, Session["listaArticulo"]))
-                //            {
-                //                Favoritos nuevo = new Favoritos();
-                //                nuevo.IdArticulo = IdProducto;
-                //                nuevo.IdUser = IdUser;
-                //                negocioF.agregar(nuevo);
-                //                listaFavoritosUsuario = Helper.ListaFavUser(IdUser, ListaArticulos, ListaFavoritos);
-                //                dgvFavoritos.DataSource = listaFavoritosUsuario;
-                //                dgvFavoritos.DataBind();
-
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        Session.Add("error", "No puede no haber favorito");
-                //        //Response.Redirect("Error.aspx");
-                //    }
-
+                
                 // Probamos cargar la grig con los valores del usuario logueado
                 if(Request.QueryString["IdProducto"] != null)
                 {
@@ -86,12 +56,9 @@ namespace presentacion
                             ListaFavoritosUsuario = negocioA.ListarFavoritos(usuario.Id);
                         }    
 
-                        // falta agregar favorito.
-
-                        //dgvFavoritos.DataSource = ListaFavoritosUsuario;
-                        //dgvFavoritos.DataBind();
+                       
                     }
-                    else //Si no estoy logueado y Si hay IdProducto en la Url
+                    else //Si no estoy logueado y Si hay IdProducto en la Url. Entonces lo dejamos agregar favoritos en session como invitado, no guarda en BD
                     {
                         User invitado = new User("", "", false);
                         Articulo nuevo = new Articulo();
@@ -106,15 +73,11 @@ namespace presentacion
                         ListaFavoritosUsuario = (List<Articulo>)Session["ListaFavoritosUsuario"];
                         if(!hayProducto(IdProducto, ListaFavoritosUsuario))
                             ListaFavoritosUsuario.Add( ListaArticulos.Find(x => x.Id== IdProducto));
-                    
-
-                        //dgvFavoritos.DataSource = ListaFavoritosUsuario;
-                        //dgvFavoritos.DataBind();
-                    
+                                      
                     }
                 }
                 else
-                    //Si No hay Id en la url
+                    //Si No hay Id de producto en la url, verificamos si hay usuario logueado, entonces cargamos la lista de favoritos
                 {
                     if (Seguridad.SessionActiva(Session["usuario"]))
                     {
@@ -122,9 +85,7 @@ namespace presentacion
                         usuario = (User)Session["usuario"];
 
                         ListaFavoritosUsuario = negocioA.ListarFavoritos(usuario.Id);
-                        //dgvFavoritos.DataSource = ListaFavoritosUsuario;
-                        //dgvFavoritos.DataBind();
-                        //this.calcularSumaGrid();
+                       
                     }
                     else
                     {
@@ -134,6 +95,8 @@ namespace presentacion
 
                 }
 
+                // Finalmente cargamos la grid con la lista de favoritos y calculamos la suma
+
                 dgvFavoritos.DataSource = ListaFavoritosUsuario;
                 dgvFavoritos.DataBind();
                 this.calcularSumaGrid();
@@ -142,6 +105,7 @@ namespace presentacion
 
         }
 
+        // Evento al hacer clic en eliminar
         protected void dgvFavoritos_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idProducto = int.Parse(dgvFavoritos.SelectedDataKey.Value.ToString());
@@ -167,6 +131,7 @@ namespace presentacion
 
         }
 
+        // Metodo auxiliar obetivo verificar que en la lista de favoritos este el id de producto, True si esta el articulo, false caso contrario
         protected bool hayProducto(int IdProducto, object lista)
         {
             List<Articulo> ListaFavoritos = (List<Articulo>)lista;
@@ -177,6 +142,7 @@ namespace presentacion
             return true;
         }
 
+        // Metodo que calcula la suma de todos los favoritos.
         public void calcularSumaGrid()
         {
             
@@ -195,22 +161,6 @@ namespace presentacion
 
         }
 
-        //public void calcularSumaGrid()
-        //{
-        //    List<Articulo> lista = (List<Articulo>)Session["ListaFavoritosxIdUsuario"];
-        //    decimal total = 0;
-
-        //    if (lista.Count != 0)
-        //    {
-        //        foreach (var item in lista)
-        //            total += item.Precio;
-
-        //        dgvFavoritos2.FooterRow.Cells[4].Text = "Total";
-        //        dgvFavoritos2.FooterRow.Cells[4].HorizontalAlign = HorizontalAlign.Right;
-        //        dgvFavoritos2.FooterRow.Cells[5].Text = total.ToString("N2");
-
-        //    }
-
-        //}
+       
     }
 }

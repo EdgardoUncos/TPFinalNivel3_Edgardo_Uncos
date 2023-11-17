@@ -74,16 +74,15 @@ namespace presentacion
 
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ddlCriterio.Items.Clear();
             if(ddlCampo.SelectedItem.Value.ToString() == "Codigo")
             {
-                ddlCriterio.Items.Clear();
                 ddlCriterio.Items.Add("Comienza con");
                 ddlCriterio.Items.Add("Termina con");
                 ddlCriterio.Items.Add("Contiene");
             }
             else
             {
-                ddlCriterio.Items.Clear();
                 ddlCriterio.Items.Add("Comienza con");
                 ddlCriterio.Items.Add("Termina con");
                 ddlCriterio.Items.Add("Contiene");

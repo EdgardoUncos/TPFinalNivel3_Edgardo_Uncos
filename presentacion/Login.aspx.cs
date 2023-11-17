@@ -16,6 +16,7 @@ namespace presentacion
 
         }
 
+        // Evento Login - Tomamos los valores de Formulario, y buscamos en BD un usuario con estos datos. True Va MiPerfil False a pagina de Error
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             UsuarioNegocio negocio = new UsuarioNegocio();

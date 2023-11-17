@@ -316,7 +316,7 @@ namespace negocio
             {
                 switch(criterio)
                 {
-                    case "Comineza":
+                    case "Comienza con":
                         consulta += "A.Descripcion like '" + filtro + "%'";
                         break;
 

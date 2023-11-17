@@ -6,10 +6,7 @@
      <style type="text/css">
         /* Coloca tus reglas de estilo personalizado aquí */
            
-        /*   Carrousel    */
-        .setear-carousel{
-            max-width: 500px;
-        }
+       
 
          .card {
              min-height: 400px;

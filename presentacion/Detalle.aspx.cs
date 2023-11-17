@@ -47,10 +47,10 @@ namespace presentacion
                     
                     List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
                     Articulo seleccionado = ListaArticulos.Find(x => x.Id == id);
-                    //Carga de los controles
 
                     
                    
+                    //Carga de los controles
                     txtCodigo.Text = seleccionado.Codigo.ToString();
                     txtNombre.Text = seleccionado.Nombre;
                     txtDescripcion.Text = seleccionado.Descripcion;

@@ -113,23 +113,6 @@ namespace presentacion
                     this.calcularSumaGrid();
                 }
 
-
-                                                                                        
-
-                //dgvFavoritos2.DataSource = Session["ListaFavoritosxIdUsuario"];
-                //dgvFavoritos2.DataBind();
-                //cargarGrid2(Session["ListaFavoritosxIdUsuario"], dgvFavoritos2);
-
-               
-                // grid view de prueba
-                //dgvFavoritos.DataSource = negocio.ListarFavoritos();
-                //dgvFavoritos.DataBind();
-
-                //Configuracion grid3
-                
-
-                 
-
             }
             catch(System.Threading.ThreadAbortException ex) { }
             catch (Exception ex)
@@ -140,12 +123,6 @@ namespace presentacion
             
 
         }
-
-        // Este metodo se ejecuta cuando seleccionamos la accion
-        //protected void dgvFavoritos_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    int id = int.Parse(dgvFavoritos.SelectedDataKey.Value.ToString());
-        //}
 
         protected void dgvFavoritos2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -164,12 +141,7 @@ namespace presentacion
             
         }
 
-        //protected void dgvFavoritos3_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    var idFavorito = dgvFavoritos3.SelectedDataKey.Value.ToString();
-        //    FavoritosNegocio negocio = new FavoritosNegocio();
-        //    negocio.eliminar(((User)Session["usuario"]).Id);
-        //}
+        
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {

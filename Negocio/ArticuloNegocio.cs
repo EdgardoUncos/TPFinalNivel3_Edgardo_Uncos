@@ -324,7 +324,7 @@ namespace negocio
                         consulta += "A.Descripcion like '%" + filtro + "%'";
                         break;
 
-                    case "Termina":
+                    case "Termina con":
                         consulta += "A.Descripcion like '%" + filtro + "'";
                         break;
 

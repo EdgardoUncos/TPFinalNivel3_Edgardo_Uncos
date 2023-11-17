@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-12">
-            <asp:GridView runat="server" ID="dgvFavoritos" AutoGenerateColumns="false" CssClass="table table-dark"
+            <asp:GridView runat="server" ID="dgvFavoritos" AutoGenerateColumns="false" CssClass="table table-striped"
                 OnSelectedIndexChanged="dgvFavoritos_SelectedIndexChanged" DataKeyNames="Id" ShowFooter="true">
                 <Columns>
                     <asp:BoundField HeaderText="Codigo" DataField="Codigo" />

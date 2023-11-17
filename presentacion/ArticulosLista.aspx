@@ -15,7 +15,7 @@
                         <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" OnTextChanged="txtFiltro_TextChanged" AutoPostBack="true" />
                     </div>
                 </div>
-                <div class="col-md-6" style="display : flex; flex-direction: column; justify-content: flex-end;">
+                <div class="col-md-6" style="display: flex; flex-direction: column; justify-content: flex-end;">
                     <div class="mb-3">
                         <asp:CheckBox Text="Filtro Avanzado" ID="chkFiltroAvanzado" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" AutoPostBack="true" runat="server" />
                     </div>
@@ -49,16 +49,25 @@
                     </div>
                 </div>
 
-                <div class="col-3" style="display: flex; flex-direction: column; justify-content: flex-end;" >
+                <div class="col-3" style="display: flex; flex-direction: column; justify-content: flex-end;">
                     <div class="mb-3">
                         <asp:Button Text="Buscar" ID="btnBuscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" runat="server" />
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-3 offset-9">
+                    <div class="mb-3">
+                        <asp:Button Text="Resetear" runat="server" CssClass="btn btn-secondary" ID="btnReiniciar" OnClick="btnReiniciar_Click" />
+                    </div>
+                </div>
+
+
+            </div>
             <%} %>
             <div class="row">
                 <div class="col-12">
-                    <asp:GridView runat="server" ID="dgvArticulosLista" CssClass="table table-dark" AutoGenerateColumns="false"
+                    <asp:GridView runat="server" ID="dgvArticulosLista" CssClass="table table-striped" AutoGenerateColumns="false"
                         OnSelectedIndexChanged="dgvArticulosLista_SelectedIndexChanged" DataKeyNames="Id" AllowPaging="true" PageSize="5" OnPageIndexChanging="dgvArticulosLista_PageIndexChanging">
                         <Columns>
                             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />

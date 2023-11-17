@@ -108,5 +108,18 @@ namespace presentacion
                 Session.Add("error", ex.ToString());
             }
         }
+
+        protected void btnReiniciar_Click(object sender, EventArgs e)
+        {
+            ddlCampo.SelectedIndex = 0;
+            ddlCriterio.SelectedIndex = 0;
+            txtFiltroAvanzado.Text = string.Empty;
+
+            if(Session["ListaArticulos"] != null)
+            {
+                dgvArticulosLista.DataSource = Session["ListaArticulos"];
+                dgvArticulosLista.DataBind();
+            }
+        }
     }
 }

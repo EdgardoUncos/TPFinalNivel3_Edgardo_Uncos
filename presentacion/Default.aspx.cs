@@ -64,27 +64,10 @@ namespace presentacion
             List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
             try
             {
-                //if (!string.IsNullOrEmpty(txtMinimo.Text))
-                //    if (!string.IsNullOrEmpty(txtMaximo.Text))
-                //        ListaFiltrada = ListaFiltrada.FindAll(x => x.Precio >= Decimal.Parse(txtMinimo.Text.ToString()) && x.Precio <= Decimal.Parse(txtMaximo.Text.ToString()));
-                //    else
-                //        ListaFiltrada = ListaFiltrada.FindAll(x => x.Precio >= Decimal.Parse(txtMinimo.Text.ToString()));
 
-                //else
-                //if (!string.IsNullOrEmpty(txtMaximo.Text))
-                //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Precio <= Decimal.Parse(txtMaximo.Text.ToString()));
-
-                //string opcion = ddlMarca.SelectedItem.Text;
-                //if (opcion != "Filtrar Marca")
-                //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Marca.Descripcion == opcion);
-
-                //opcion = ddlCategoria.SelectedItem.Text;
-                //if (opcion != "Filtrar Categoria")
-                //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Categoria.Descripcion == opcion);
-
-                ListaFiltrada = Filtrar(ListaArticulos, txtMinimo.Text, txtMaximo.Text);
-
+                ListaFiltrada = Filtrar(ListaArticulos, txtMinimo.Text, txtMaximo.Text, ddlMarca.SelectedItem.ToString(), ddlCategoria.SelectedItem.ToString());
                 ListaArticulos = ListaFiltrada;
+
 
                 CargarRepeater(ListaFiltrada);
             }
@@ -112,7 +95,8 @@ namespace presentacion
             string id = ((Button)sender).CommandArgument;
         }
 
-        private List<Articulo> Filtrar(List<Articulo> lista, string precioMinimo, string precioMaximo)
+        // Metodo que filtra segun los parametros, devuelve una lista de articulos
+        private List<Articulo> Filtrar(List<Articulo> lista, string precioMinimo, string precioMaximo, string marca, string categoria)
         {
             List<Articulo> ListaFiltrada = lista;
 
@@ -126,13 +110,13 @@ namespace presentacion
                 if (!string.IsNullOrEmpty(precioMaximo))
                 ListaFiltrada = lista.FindAll(x => x.Precio <= Decimal.Parse(precioMaximo.ToString()));
 
-            //string opcion = ddlMarca.SelectedItem.Text;
-            //if (opcion != "Filtrar Marca")
-            //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Marca.Descripcion == opcion);
+            string opcion = marca;
+            if (opcion != "Filtrar Marca")
+                ListaFiltrada = ListaFiltrada.FindAll(x => x.Marca.Descripcion == opcion);
 
-            //opcion = ddlCategoria.SelectedItem.Text;
-            //if (opcion != "Filtrar Categoria")
-            //    ListaFiltrada = ListaFiltrada.FindAll(x => x.Categoria.Descripcion == opcion);
+            opcion = categoria;
+            if (opcion != "Filtrar Categoria")
+                ListaFiltrada = ListaFiltrada.FindAll(x => x.Categoria.Descripcion == opcion);
 
             return ListaFiltrada;
         }

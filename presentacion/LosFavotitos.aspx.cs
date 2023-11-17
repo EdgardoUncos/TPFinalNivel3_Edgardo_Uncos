@@ -29,55 +29,25 @@ namespace presentacion
 
             if (!IsPostBack)
             {
-                //    //Preguntamos Si hay en Session ListaArticulos de todos los usuarios
-                //    if (Session["ListaArticulos"] == null)
-                //    {
-                //        ListaArticulos = negocioA.listar2();
-                //        Session.Add("ListaArticulos", ListaArticulos);
-                //    }
-
-                //    if (Request.QueryString["IdProducto"] != null)
-                //    {
-                //        int IdProducto = int.Parse(Request.QueryString["IdProducto"].ToString());
-
-                //        // Preguntamos si hay un usuario logeado.
-                //        if (Seguridad.SessionActiva(Session["usuario"]))
-                //        {
-                //            int IdUser = ((User)Session["Usuario"]).Id;
-                //            if(!Helper.hayFavorito(IdProducto, Session["listaArticulo"]))
-                //            {
-                //                Favoritos nuevo = new Favoritos();
-                //                nuevo.IdArticulo = IdProducto;
-                //                nuevo.IdUser = IdUser;
-                //                negocioF.agregar(nuevo);
-                //                listaFavoritosUsuario = Helper.ListaFavUser(IdUser, ListaArticulos, ListaFavoritos);
-                //                dgvFavoritos.DataSource = listaFavoritosUsuario;
-                //                dgvFavoritos.DataBind();
-
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        Session.Add("error", "No puede no haber favorito");
-                //        //Response.Redirect("Error.aspx");
-                //    }
-
+                
                 // Probamos cargar la grig con los valores del usuario logueado
                 if(Request.QueryString["IdProducto"] != null)
                 {
                     int IdProducto = int.Parse(Request.QueryString["IdProducto"].ToString());
 
-                    // Si estoy logueado
+                    // Preguntamos si esta logueado, sino es un usuario anonimo que agrega a favoritos
                     if (Seguridad.SessionActiva(Session["usuario"]))
                     {
                         User usuario;
                         usuario = (User)Session["usuario"];
-                        //ListaFavoritosUsuario = Helper.ListaFavUser(usuario.Id, ListaArticulos, ListaFavoritos);
+
+                        //Listamos los favoritos de usuario desde la BD
                         ListaFavoritosUsuario = negocioA.ListarFavoritos(usuario.Id);
                         
                         if(!hayProducto(IdProducto, ListaFavoritosUsuario))
                         {
+                            // Si no esta el articulo en la bd, lo agregamos y cargagoma la lista de Favoritos del usuario
+
                             Favoritos aux = new Favoritos();
                             aux.IdUser = usuario.Id;
                             aux.IdArticulo = IdProducto;
@@ -86,10 +56,7 @@ namespace presentacion
                             ListaFavoritosUsuario = negocioA.ListarFavoritos(usuario.Id);
                         }    
 
-                        // falta agregar favorito.
-
-                        //dgvFavoritos.DataSource = ListaFavoritosUsuario;
-                        //dgvFavoritos.DataBind();
+                        
                     }
                     else //Si no estoy logueado y Si hay IdProducto en la Url
                     {
@@ -108,9 +75,6 @@ namespace presentacion
                             ListaFavoritosUsuario.Add( ListaArticulos.Find(x => x.Id== IdProducto));
                     
 
-                        //dgvFavoritos.DataSource = ListaFavoritosUsuario;
-                        //dgvFavoritos.DataBind();
-                    
                     }
                 }
                 else
@@ -122,9 +86,7 @@ namespace presentacion
                         usuario = (User)Session["usuario"];
 
                         ListaFavoritosUsuario = negocioA.ListarFavoritos(usuario.Id);
-                        //dgvFavoritos.DataSource = ListaFavoritosUsuario;
-                        //dgvFavoritos.DataBind();
-                        //this.calcularSumaGrid();
+                        
                     }
                     else
                     {
@@ -167,8 +129,10 @@ namespace presentacion
 
         }
 
+        // Recorre la lista de favoritos y comprueba si ya esta, si esta true, sino false
         protected bool hayProducto(int IdProducto, object lista)
         {
+            // Casteo de object a lista
             List<Articulo> ListaFavoritos = (List<Articulo>)lista;
 
             if (ListaFavoritos.Find(x => x.Id == IdProducto) == null)
@@ -177,6 +141,7 @@ namespace presentacion
             return true;
         }
 
+        //Calcula la suma de los favoritos y coloca el resultado en la celda de Total
         public void calcularSumaGrid()
         {
             
@@ -194,23 +159,5 @@ namespace presentacion
             }
 
         }
-
-        //public void calcularSumaGrid()
-        //{
-        //    List<Articulo> lista = (List<Articulo>)Session["ListaFavoritosxIdUsuario"];
-        //    decimal total = 0;
-
-        //    if (lista.Count != 0)
-        //    {
-        //        foreach (var item in lista)
-        //            total += item.Precio;
-
-        //        dgvFavoritos2.FooterRow.Cells[4].Text = "Total";
-        //        dgvFavoritos2.FooterRow.Cells[4].HorizontalAlign = HorizontalAlign.Right;
-        //        dgvFavoritos2.FooterRow.Cells[5].Text = total.ToString("N2");
-
-        //    }
-
-        //}
     }
 }

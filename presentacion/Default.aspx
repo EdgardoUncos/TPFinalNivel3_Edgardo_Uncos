@@ -129,7 +129,7 @@
                                     <a href="LosFavotitos.aspx?IdProducto=<%#Eval("Id") %>" class="btn btn-danger">🤍</a>
                                     <%--<asp:Button Text="Agregar a Favoritos" CssClass="btn btn-danger" ID="btnFavoritos" runat="server" CommandName="Id" CommandArgument='<%#Eval("Id") %>' OnClick="btnFavoritos_Click" />--%>
                                     <a href="Detalle.aspx?IdProducto=<%#Eval("Id") %>" class="btn btn-light">Ver detalle</a>
-                                    <p class="lead"><%#Eval("Precio") %></p>
+                                    <p class="lead"><%#Eval("Precio", "{0:F2}") %></p>
                                 </div>
                             </div>
                         </div>

@@ -51,7 +51,7 @@ namespace presentacion
                             Favoritos aux = new Favoritos();
                             aux.IdUser = usuario.Id;
                             aux.IdArticulo = IdProducto;
-                            negocioF.agregar(aux);
+                            negocioF.agregarFav(aux);
                             //ListaFavoritosUsuario.Add(ListaArticulos.Find(x => x.Id == IdProducto));   
                             ListaFavoritosUsuario = negocioA.ListarFavoritos(usuario.Id);
                         }    
@@ -136,7 +136,7 @@ namespace presentacion
         {
             List<Articulo> ListaFavoritos = (List<Articulo>)lista;
 
-            if (ListaFavoritos.Find(x => x.Id == IdProducto) == null)
+            if (ListaFavoritos == null ||  ListaFavoritos.Find(x => x.Id == IdProducto) == null)
                 return false;
 
             return true;

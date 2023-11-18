@@ -68,6 +68,49 @@ namespace negocio
             }
         }
 
+        // Agrega un favorito no repetido por usuario
+        public void agregarFav(Favoritos fav)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                // Comprobar si hay un registro con ese Id y Usuruario
+                datos.setearConsulta("SELECT COUNT(*) AS Cantidad FROM FAVORITOS WHERE IdUser = @idUser AND IdArticulo = @idArticulo");
+                datos.setearParametro("@idUser", fav.IdUser);
+                datos.setearParametro("@idArticulo", fav.IdArticulo);
+                datos.ejecutarLectura();
+                int cant = 0;
+                if ((datos.Lector.Read()))
+                    cant = int.Parse(datos.Lector["Cantidad"].ToString());
+
+                datos.cerrarConexion();
+                datos = new AccesoDatos();
+
+
+                if(cant == 0)
+                {
+                    datos.setearConsulta("Insert Into Favoritos (IdUser, IdArticulo) values (@idUser, @idArticulo)");
+                    datos.setearParametro("@idUser", fav.IdUser);
+                    datos.setearParametro("@idArticulo", fav.IdArticulo);
+                    datos.ejecutarAccion();
+                    datos.cerrarConexion();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();

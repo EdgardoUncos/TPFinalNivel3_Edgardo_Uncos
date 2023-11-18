@@ -86,7 +86,7 @@ namespace presentacion
                         nuevo.IdArticulo = int.Parse(Request.QueryString["IdArticulo"]);
 
                         if (!hayFavorito(nuevo.IdArticulo, Helper.ListaFavUser(usuario.Id, negocio2.listar2(), negocio.ListarFavoritos())))
-                            negocio.agregar(nuevo);
+                            negocio.agregarFav(nuevo);
                         else
                             lblMensaje.Text = "Solo se puede agregar un favorito por tipo de producto -- Aun no es un Eccommerce ";
                     }

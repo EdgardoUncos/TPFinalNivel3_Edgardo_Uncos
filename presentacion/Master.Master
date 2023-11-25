@@ -72,7 +72,8 @@
             </header>
 
             <hr />
-            <main class="container my-auto d-flex flex-column justify-content-center align-items-center">
+            <%--my-auto d-flex flex-column justify-content-center align-items-center--%>
+            <main class="container ">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </main>

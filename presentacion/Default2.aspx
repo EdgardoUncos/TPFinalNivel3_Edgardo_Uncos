@@ -12,8 +12,8 @@
         }
 
         .wrapper {
-            /*padding: 30px;*/
-            /*max-width: 1200px;*/
+            padding: 30px;
+            max-width: 1200px;
             margin: auto;
         }
 
@@ -157,44 +157,60 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="wrapper">
+
         <div class="content py-md-0 py-3">
         <section id="sidebar">
             <div class="py-3">
-                <h5 class="font-weight-bold">Marca</h5>
-                <div class="brand">
-                    
 
-                    <div>
+                <div class="brand">
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold">Marca</h5>
                         <asp:DropDownList runat="server" ID="ddlMarca" AppendDataBoundItems="true" CssClass="form-control">
                             <asp:ListItem Value="Filtrar Marca"></asp:ListItem>
+                         </asp:DropDownList>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold mt-2">Categoría</h5>
+                        <asp:DropDownList runat="server" ID="ddlCategoria" AppendDataBoundItems="true" CssClass="form-control">
+                            <asp:ListItem Value="Filtrar Categoria"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold mb-1">Precio</h5>
+                        
+                        <div class="d-flex gap-1 justify-content-evenly align-content-center">
+                            <div>
+                                <h6 class="fw-normal">Minimo</h6>
+                                <asp:TextBox runat="server" ID="txtMinimo" CssClass="form-control mb-1"></asp:TextBox>
+                                <asp:Button Text="Filtrar" runat="server" ID="btnFiltrar" OnClick="btnFiltrar_Click" CssClass="btn btn-primary" />
+                            </div>
+                            <div>
+                                <h6 class="fw-normal">Maximo</h6>
+                                <asp:TextBox runat="server" ID="txtMaximo" CssClass="form-control mb-1"></asp:TextBox>
+                                <asp:Button Text="Reiniciar" runat="server" ID="btnReiniciar" OnClick="btnReiniciar_Click" CssClass="btn btn-light" />
+                            </div>
 
-                    <h5 class="font-weight-bold">Categoría</h5>
-                    <asp:DropDownList runat="server" ID="ddlCategoria" AppendDataBoundItems="true" CssClass="form-control">
-                        <asp:ListItem Value="Filtrar Categoria"></asp:ListItem>
-                    </asp:DropDownList>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="d-flex justify-content-evenly align-items-center">
+                        
+                        
+                    </div>
                 </div>
             </div>
-
-            <div class="d-flex justify-content-evenly align-items-center">
-                <label class="form-label">Minimo</label>
-                <label class="form-label">Máximo</label>
-            </div>
-
-            <div class="d-flex justify-content-evenly align-content-center">
-                <asp:TextBox runat="server" ID="txtMinimo" CssClass="form-control"></asp:TextBox>
-                <asp:TextBox runat="server" ID="txtMaximo" CssClass="form-control"></asp:TextBox>
-            </div>
-
-            <div class="d-flex justify-content-evenly align-items-center">
-                <asp:Button Text="Filtrar" runat="server" ID="btnFiltrar" OnClick="btnFiltrar_Click" CssClass="btn btn-light" />
-                <asp:Button Text="Reiniciar" runat="server" ID="btnReiniciar" OnClick="btnReiniciar_Click" CssClass="btn btn-light" />
-            </div>
+                    
 
 
 
         </section>
+
+
+
         <!-- Products Section -->
         <section id="products">
             <div class="container py-3">
@@ -205,20 +221,18 @@
                             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
                                 <div class="card">
                                     <img class="card-img-top" src="<%#Eval("UrlImagen") %>" onerror="this.src='https://www.mansor.com.uy/wp-content/uploads/2020/06/imagen-no-disponible2.jpg'">
-                                    <div class="card-body">
+                                    <div class="card-body text-center">
                                         <h6 class="font-weight-bold pt-1"><%#Eval("Nombre") %></h6>
                                         <div class="text-muted description"><%#Eval("Descripcion") %></div>
-                                        <div class="d-flex align-items-center product"><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="fas fa-star"></span><span class="far fa-star"></span></div>
+                                        <div class="h6 font-weight-bold"><%#Eval("Precio", "{0:F2}") %> USD</div>
                                         <div class="d-flex align-items-center justify-content-between pt-3">
-                                            <div class="d-flex flex-column">
-                                                <div class="h6 font-weight-bold"><%#Eval("Precio", "{0:F2}") %> USD</div>
-                                                
-                                            </div>
-                                            <a class="btn btn-primary" href="LosFavotitos.aspx?IdProducto=<%#Eval("Id") %>">Fav</a>
+                                           
                                             <div class="d-flex justify-content-center align-content-center">
-                                                <a class="btn btn-light" href="Detalle.aspx?IdProducto=<%#Eval("Id") %>">Detalle</a>
+                                                <%--<a class="btn btn-light" href="Detalle.aspx?IdProducto=<%#Eval("Id") %>">Detalle</a>--%>
                                             </div>
-                                    </div>
+                                            <button class="btn btn-light">Detalle</button>
+                                            <a class="btn btn-primary" href="LosFavotitos.aspx?IdProducto=<%#Eval("Id") %>">Fav</a>
+                                        </div>
                                 </div>
                             </div>
                             </div>

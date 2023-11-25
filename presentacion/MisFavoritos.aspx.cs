@@ -14,42 +14,6 @@ namespace presentacion
         private List<Articulo> ListaArticulos;
         private List<Favoritos> ListaFavoritos;
 
-        public bool hayFavorito(int idArticulo, object lista)
-        {
-            List<Articulo> listaArticulos = (List<Articulo>)lista;
-
-            foreach (Articulo articulo in listaArticulos)
-            {
-                if (articulo.Id == idArticulo)
-                    return true;
-
-            }
-            return false; 
-        }
-            
-        public void cargarGrid2(object data, object control)
-        {
-            ((GridView)control).DataSource = (List<Articulo>)data;
-            ((GridView)control).DataBind();
-            calcularSumaGrid();
-        }
-        public void calcularSumaGrid()
-        {
-            List<Articulo> lista = (List<Articulo>) Session["ListaFavoritosxIdUsuario"];
-            decimal total=0;
-
-            if (lista.Count != 0)
-            {
-                foreach (var item in lista)
-                    total += item.Precio;
-
-                dgvFavoritos2.FooterRow.Cells[4].Text = "Total";
-                dgvFavoritos2.FooterRow.Cells[4].HorizontalAlign = HorizontalAlign.Right;
-                dgvFavoritos2.FooterRow.Cells[5].Text = total.ToString("N2");
-
-            }
-
-        }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -60,23 +24,17 @@ namespace presentacion
                 if (!(usuario != null))
                     Response.Redirect("Login.aspx");
 
-
-
-
                 //------------------------------------------------------------------------------------
 
                 FavoritosNegocio negocio = new FavoritosNegocio();
                 ArticuloNegocio negocio2 = new ArticuloNegocio();
                 
-                
-
-                
+     
                 //ListaFavoritos = negocio.ListarFavoritos();
 
                 if(!IsPostBack)
                 {
                     
-
                     //Lo Primero que hacemos es preguntar si vino un IdArticulo para Agregar en la lista de favoritos
                     if (Request.QueryString["IdArticulo"] != null)
                     {
@@ -141,7 +99,44 @@ namespace presentacion
             
         }
 
-        
+        public bool hayFavorito(int idArticulo, object lista)
+        {
+            List<Articulo> listaArticulos = (List<Articulo>)lista;
+
+            foreach (Articulo articulo in listaArticulos)
+            {
+                if (articulo.Id == idArticulo)
+                    return true;
+
+            }
+            return false;
+        }
+
+        public void cargarGrid2(object data, object control)
+        {
+            ((GridView)control).DataSource = (List<Articulo>)data;
+            ((GridView)control).DataBind();
+            calcularSumaGrid();
+        }
+        public void calcularSumaGrid()
+        {
+            List<Articulo> lista = (List<Articulo>)Session["ListaFavoritosxIdUsuario"];
+            decimal total = 0;
+
+            if (lista.Count != 0)
+            {
+                foreach (var item in lista)
+                    total += item.Precio;
+
+                dgvFavoritos2.FooterRow.Cells[4].Text = "Total";
+                dgvFavoritos2.FooterRow.Cells[4].HorizontalAlign = HorizontalAlign.Right;
+                dgvFavoritos2.FooterRow.Cells[5].Text = total.ToString("N2");
+
+            }
+
+        }
+
+
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {

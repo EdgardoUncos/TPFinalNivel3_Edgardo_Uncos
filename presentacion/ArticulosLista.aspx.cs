@@ -72,6 +72,7 @@ namespace presentacion
             }
         }
 
+        // Cuando cambiamos el primer checkbox cargamos el segundo
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlCriterio.Items.Clear();
@@ -90,6 +91,7 @@ namespace presentacion
 
         }
 
+        // Evento click en Boton Buscar
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try

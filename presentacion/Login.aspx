@@ -45,13 +45,15 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row" style="width: 100%;">
-        <div class="col-2"></div>
-
+    <div class="row justify-content-center align-content-center mt-5" style="width: 100%;">
+        
         <%--Formulario de contacto--%>
-        <div class="col-8">
-            <div class="border border-dark rounded rounded-3 p-4 mt-3">
-                <h2 class="display-4 mt-5 text-center">Login</h2>
+        <div class="col-12 col-md-8 col-xl-6 mb-5" style="width: 25rem;">
+            <div class="border border-secondary rounded rounded-5 text-secondary shadow p-4 mt-3">
+                <div class="d-flex justify-content-center mt-2">
+                    <img src="/Images/login-icon.svg" alt="Login Icon" style="height: 5rem;" />
+                </div>
+                <h2 class="display-3 mt-2 text-center fw-semibold">Login</h2>
                 <div class="mb-3">
                     <label class="form-label">Email</label>
                     <asp:TextBox ClientIDMode="Static" runat="server" ID="txtEmail" CssClass="form-control" />
@@ -73,10 +75,6 @@
             </div>
         </div>
 
-        <div class="col-2"></div>
-
-
-
-
+        
     </div>
 </asp:Content>

@@ -54,7 +54,7 @@ namespace presentacion
                     txtCodigo.Text = seleccionado.Codigo.ToString();
                     txtNombre.Text = seleccionado.Nombre;
                     txtDescripcion.Text = seleccionado.Descripcion;
-                    txtPrecio.Text = seleccionado.Precio.ToString();
+                    txtPrecio.Text = seleccionado.Precio.ToString("N2");
                     imgArticulo.ImageUrl = seleccionado.UrlImagen;
                     
 

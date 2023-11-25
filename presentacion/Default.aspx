@@ -5,13 +5,16 @@
     <%--Estilos css--%> 
      <style type="text/css">
         /* Coloca tus reglas de estilo personalizado aquí */
-           
-       
-
          .card {
              min-height: 400px;
          } 
-        
+           
+        .card-img-top{
+            max-width: 250px; 
+            max-height: 200px; 
+            margin: auto; 
+            object-fit: contain;
+        }      
             
 
       </style>
@@ -118,10 +121,8 @@
                         <div class="col">
                             <div class="card text-center">
                                 <div style="height:60%;">
-                                    <img src="<%#Eval("UrlImagen") %>" class="card-img-top rounded-start" onerror="this.src='Images/placeholder.jpg'" style="max-width: 300px; max-height: 250px; margin: auto; object-fit: contain;" alt="..." />
+                                    <img src="<%#Eval("UrlImagen") %>" class="card-img-top rounded-start" onerror="this.src='Images/placeholder.jpg'"  alt="..." />
                                 </div>
-
-                                
 
                                 <div class="card-body">
                                     <h5 class="card-title"><%#Eval("Nombre")%></h5>
@@ -131,16 +132,18 @@
                                     <a href="Detalle.aspx?IdProducto=<%#Eval("Id") %>" class="btn btn-light">Ver detalle</a>
                                     <p class="lead"><%#Eval("Precio", "{0:F2}") %></p>
                                 </div>
+                                
                             </div>
                         </div>
                     </ItemTemplate>
 
-
                 </asp:Repeater>
-
-
             </div>
         </div>
+
+
+
+
 
 
     </div>

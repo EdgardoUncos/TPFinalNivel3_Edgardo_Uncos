@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
+    //Esta clase se va a utilizar para cargar registro de la tabla MARCAS y CATEGORIAS, ya que tiene solo dos campos y mismo tipo de datos
     public class Tipo
     {
         public int Id { get; set; }

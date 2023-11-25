@@ -2,10 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row justify-content-center" style="width: 80%;">
+    <div class="row justify-content-center align-items-center" style="width: 100%;">
 
-        <div class="col-12 col-md-8 col-xl-6 mb-5">
-            <div class="border border-dark rounded rounded-3 p-4 mt-3">
+        <div class="col-12 col-md-8 col-xl-6 mb-5" style="width: 25rem;" >
+            <div class="border border-dark rounded rounded-5 p-4 mt-3" >
 
                 <h2 class="display-4 mt-5 text-center">Crea tu perfil</h2>
                 <div class="d-flex justify-content-center align-items-center mt-2">

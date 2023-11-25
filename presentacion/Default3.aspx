@@ -8,6 +8,18 @@
             
             font-family: 'Poppins', sans-serif;
         }
+
+        .card:hover {
+            transform: scale(1.1);
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+        }
+        img {
+            width: 192px;
+            height: 132px;
+            object-fit: contain;
+        }
+
     </style>
 
 </asp:Content>
@@ -22,15 +34,15 @@
             <h5>Filtros</h5>
             <hr />
 
-            <div>
+            <div class="mb-3">
                 <label class="form-label" for="ddlMarca">Marca</label>
-                <asp:DropDownList runat="server" ID="ddlMarca" AppendDataBoundItems="true" Width="150px" CssClass="form-control">
+                <asp:DropDownList runat="server" ID="ddlMarca" AppendDataBoundItems="true" CssClass="form-control">
                     <asp:ListItem Value="Filtrar Marca"></asp:ListItem>
                 </asp:DropDownList>
             </div>
-            <div>
+            <div class="mb-3">
                 <label class="form-label" for="ddlCategoria">Categoria</label>
-                <asp:DropDownList runat="server" ID="ddlCategoria" AppendDataBoundItems="true" Width="150px" CssClass="form-control">
+                <asp:DropDownList runat="server" ID="ddlCategoria" AppendDataBoundItems="true" CssClass="form-control">
                     <asp:ListItem Value="Filtrar Categoria"></asp:ListItem>
                 </asp:DropDownList>
             </div>
@@ -39,37 +51,20 @@
             </div>
 
 
-            <h4>Precio</h4>
-            <div class="row">
-                <div class="col-12">
-                    <asp:RadioButton ID="rbt1" runat="server" />
-                    <label>Menos de 50</label>
-                </div>
-                <div class="col-12">
-                    <asp:RadioButton ID="rbt2" runat="server" />
-                    <label>$50 y $500</label>
-                </div>
-                <div class="col-12">
-                    <asp:RadioButton ID="RadioButton4" runat="server" />
-                    <label>$500 y $1000</label>
-                </div>
-                <div class="col-12">
-                    <asp:RadioButton ID="rbt4" runat="server" />
-                    <label>$1000 y mas</label>
-                </div>
-                <hr />
+            <h5>Precio</h5>
+            <div class="row gx-1">
+                
                 <div class="col-6">
-                    <label>Minimo</label>
-                    <asp:TextBox runat="server" ID="txtMinimo" CssClass="form-control" Width="120px" />
+                    <label class="mb-1">Minimo</label>
+                    <asp:TextBox runat="server" ID="txtMinimo" CssClass="form-control mb-2" />
+                    <asp:Button Text="Filtrar" runat="server" ID="btnFiltrar" OnClick="btnFiltrar_Click" CssClass="btn btn-primary" />
                 </div>
                 <div class="col-6">
-                    <label>Máximo</label>
-                    <asp:TextBox runat="server" ID="txtMaximo" CssClass="form-control" Width="120px" />
-                </div>
-                <div class="col-12 d-flex justify-content-around mt-3">
-                    <asp:Button Text="Filtrar" runat="server" ID="btnFiltrar" OnClick="btnFiltrar_Click" CssClass="btn btn-light" />
+                    <label class="mb-1">Máximo</label>
+                    <asp:TextBox runat="server" ID="txtMaximo" CssClass="form-control mb-2" />
                     <asp:Button Text="Reiciciar" runat="server" ID="btnReiniciar" OnClick="btnReiniciar_Click" CssClass="btn btn-light" />
                 </div>
+               
             </div>
 
 

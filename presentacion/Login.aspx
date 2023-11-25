@@ -16,8 +16,8 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row" style="width: 80%;">
-        <div class="col-2"></div>
+    <div class="row" style="width: 100%;">
+        <div class="col-4"></div>
         <div class="col">
             <div class="border border-dark rounded rounded-3 p-4 mt-3">
                 <h2 class="display-4 mt-5 text-center">Login</h2>
@@ -39,7 +39,7 @@
                 <a class="btn btn-outline-primary" href="Registro.aspx">Registrate</a>
             </div>
         </div>
-        <div class="col-2"></div>
+        <div class="col-4"></div>
 
 
 

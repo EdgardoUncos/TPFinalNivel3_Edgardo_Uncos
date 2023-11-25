@@ -194,9 +194,6 @@
                         </div>
                     </div>
 
-
-
-
                     <div class="d-flex justify-content-evenly align-items-center">
                         
                         
@@ -204,11 +201,7 @@
                 </div>
             </div>
                     
-
-
-
         </section>
-
 
 
         <!-- Products Section -->

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
 
         <div class="col-12 col-md-8 col-xl-6 mb-5">
-            <div class="border border-dark rounded rounded-3 p-4 mt-3">
+            <div class="card p-4 mt-3">
 
                 <h2 class="display-4 mt-5 text-center">Crea tu perfil</h2>
                 <div class="d-flex justify-content-center align-items-center mt-2">

@@ -217,7 +217,7 @@
                                     <div class="card-body text-center">
                                         <h6 class="font-weight-bold pt-1"><%#Eval("Nombre") %></h6>
                                         <div class="text-muted description"><%#Eval("Descripcion") %></div>
-                                        <div class="h6 font-weight-bold"><%#Eval("Precio", "{0:F2}") %> USD</div>
+                                        <div class="h6 font-weight-bold">$ <%#Eval("Precio", "{0:F2}") %> USD</div>
                                         <div class="d-flex align-items-center justify-content-between pt-3">
                                            
                                             <div class="d-flex justify-content-center align-content-center">

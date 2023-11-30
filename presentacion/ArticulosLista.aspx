@@ -58,7 +58,7 @@
             <%} %>
             <div class="row">
                 <div class="col-12">
-                    <asp:GridView runat="server" ID="dgvArticulosLista" CssClass="table table-dark" AutoGenerateColumns="false"
+                    <asp:GridView runat="server" ID="dgvArticulosLista" CssClass="table table-striped" AutoGenerateColumns="false"
                         OnSelectedIndexChanged="dgvArticulosLista_SelectedIndexChanged" DataKeyNames="Id" AllowPaging="true" PageSize="5" OnPageIndexChanging="dgvArticulosLista_PageIndexChanging">
                         <Columns>
                             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
@@ -66,7 +66,7 @@
                             <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
                             <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
                             <asp:BoundField HeaderText="Categoria" DataField="Categoria.Descripcion" />
-                            <asp:BoundField HeaderText="Precio" DataField="Precio" />
+                            <asp:BoundField HeaderText="Precio" DataField="Precio"  DataFormatString="{0:F2}"/>
                             <asp:CommandField ShowSelectButton="true" HeaderText="Accion" SelectText="Modificar" />
                         </Columns>
                     </asp:GridView>

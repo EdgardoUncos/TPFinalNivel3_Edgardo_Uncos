@@ -95,8 +95,6 @@
                                     <img src="<%#Eval("UrlImagen") %>" class="card-img-top rounded-start" onerror="this.src='Images/placeholder.jpg'" style="max-width: 300px; max-height: 250px; margin: auto; object-fit: contain;" alt="..." />
                                 </div>
 
-                                
-
                                 <div class="card-body">
                                     <h5 class="card-title"><%#Eval("Nombre")%></h5>
                                     <p class="card-text"><%#Eval("Descripcion") %></p>

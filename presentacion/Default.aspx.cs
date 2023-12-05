@@ -11,28 +11,46 @@ namespace presentacion
 {
     public partial class Default : System.Web.UI.Page
     {
+        private ArticuloNegocio negocio = new ArticuloNegocio();
         public List<Articulo> ListaArticulos { get; set; }
+        public PaginacionViewModel PaginacionViewModel { get; set; } = new PaginacionViewModel();
 
-        private void CargarRepeater(object lista)
+        public List<Articulo> ListaArticuloPagina { get; set; }
+        public PaginacionRespuesta<Articulo> PaginacionRespuesta { get; set; }
+
+        // metodo que filtra una lista con un parametro de paginacion. Retorna una lista
+        private List<Articulo> PaginarConParametro(List<Articulo> lista, PaginacionViewModel parametro)
         {
-            List<Articulo> listado = (List<Articulo>)lista;
-            repRepedidor.DataSource = listado;
-            repRepedidor.DataBind();
+            List<Articulo>  filtrada  = (from l in lista select l).Skip(parametro.RecordsASaltar).Take(parametro.RecordsPorPagina).ToList();
+
+            return filtrada;
         }
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                
                 if (!IsPostBack)
                 {
-                    ArticuloNegocio negocio = new ArticuloNegocio();
-                    ListaArticulos = negocio.listarConSP();
-                    if (Session["ListaArticulos"] == null)
-                        Session.Add("ListaArticulos", ListaArticulos);
-                    CargarRepeater(Session["ListaArticulos"]);
+                    PaginacionViewModel PaginacionViewModel = new PaginacionViewModel();
 
+                    ListaArticulos = negocio.listar();
+                    if (Session["ListaArticulos"] == null)
+                    {
+                        Session.Add("ListaArticulos", ListaArticulos);
+                    }
+                    //ListaArticuloPagina = negocio.listarPaginacionViewModel(PaginacionViewModel);
+                    ListaArticuloPagina = PaginarConParametro(ListaArticulos, PaginacionViewModel);
+
+                    PaginacionRespuesta = new PaginacionRespuesta<Articulo>()
+                    {
+                        Elementos = ListaArticuloPagina,
+                        Pagina = 1,
+                        RecordsPorPagina = 5,
+                        CantidadTotalRecords = ListaArticulos.Count
+                    };
+
+                    
                     TipoNegocio tipoNegocio = new TipoNegocio();
                     ddlCategoria.DataSource = tipoNegocio.listarCategoria();
                     ddlCategoria.SelectedIndex = -1;
@@ -45,10 +63,30 @@ namespace presentacion
                     ddlMarca.DataTextField = "Descripcion";
                     ddlMarca.DataValueField = "Id";
                     ddlMarca.DataBind();
+
+                    if (Request.QueryString["pagina"] != null && Request.QueryString["recordsPorPagina"]!= null)
+                    {
+                        // Parametros de paginacion
+                        PaginacionViewModel.Pagina = int.Parse(Request.QueryString["pagina"].ToString());
+                        PaginacionViewModel.RecordsPorPagina = int.Parse(Request.QueryString["recordsPorPagina"].ToString());
+
+                        ListaArticulos = Session["ListaArticulos"] != null ? (List<Articulo>)Session["ListaArticulos"] : negocio.listar();
+                        //ListaArticuloPagina = negocio.listarPaginacionViewModel(PaginacionViewModel);
+                        ListaArticuloPagina = PaginarConParametro(ListaArticulos, PaginacionViewModel);
+                        
+
+                        PaginacionRespuesta = new PaginacionRespuesta<Articulo>()
+                        {
+                            Elementos = ListaArticuloPagina,
+                            Pagina = PaginacionViewModel.Pagina,
+                            RecordsPorPagina = PaginacionViewModel.RecordsPorPagina,
+                            CantidadTotalRecords = ListaArticulos.Count
+                        };
+                    }
+
+
+
                 }
-
-
-
 
             }
             catch (Exception ex)
@@ -60,16 +98,32 @@ namespace presentacion
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            List<Articulo> ListaFiltrada = (List<Articulo>)Session["ListaArticulos"];
-            List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+            // Lista que resulta de filtrar segun precio o minimo o categoria
+            List<Articulo> ListaFiltrada;
+            List<Articulo> Pagina;
+
+            // Lista de todos los articulo, de aca se filtrara.
+            List<Articulo> Lista = negocio.listar();
+
             try
             {
+                // Filtramos segun parametros y asignamos la lista a -- PaginacionRespuesta.Elementos --
                 
-                ListaFiltrada = Filtrar(ListaArticulos, txtMinimo.Text, txtMaximo.Text, ddlMarca.SelectedItem.ToString(), ddlCategoria.SelectedItem.ToString());
+                ListaFiltrada = Filtrar(Lista, txtMinimo.Text, txtMaximo.Text, ddlMarca.SelectedItem.ToString(), ddlCategoria.SelectedItem.ToString());
+                Pagina = PaginarConParametro(ListaFiltrada, PaginacionViewModel);
                 ListaArticulos = ListaFiltrada;
 
+                Session["ListaArticulos"] = ListaFiltrada;
 
-                CargarRepeater(ListaFiltrada);
+                PaginacionRespuesta = new PaginacionRespuesta<Articulo>()
+                {
+                    Elementos = Pagina,
+                    Pagina = 1,
+                    RecordsPorPagina = 5,
+                    CantidadTotalRecords = ListaFiltrada.Count
+                };
+
+                              
             }
             catch (Exception ex)
             {
@@ -83,9 +137,18 @@ namespace presentacion
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulos = negocio.listarConSP();
-            Session.Add("ListaArticulos", ListaArticulos);
-            CargarRepeater(Session["ListaArticulos"]);
 
+            ListaArticuloPagina = PaginarConParametro(ListaArticulos, PaginacionViewModel);
+
+            PaginacionRespuesta = new PaginacionRespuesta<Articulo>()
+            {
+                Elementos = ListaArticuloPagina,
+                Pagina = 1,
+                RecordsPorPagina = 5,
+                CantidadTotalRecords = ListaArticulos.Count
+            };
+            
+            
             ddlMarca.SelectedIndex = 0;
             ddlCategoria.SelectedIndex = 0;
         }

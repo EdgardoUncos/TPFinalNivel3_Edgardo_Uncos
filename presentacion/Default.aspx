@@ -46,7 +46,7 @@
     <%--Filtrar Por marca Categoria y Precio--%>
     <div class="row mt-3">
 
-        <div class="col-12 col-sm-4 col-lg-3 pe-3">
+        <div class="col-12 col-sm-4 col-lg-3 pe-3 mb-1 mb-sm-0">
 
             <h5>Filtros</h5>
             <hr />
@@ -73,7 +73,7 @@
 
                 <div class="col-6">
                     <asp:TextBox runat="server" ID="txtMinimo" CssClass="form-control mb-2" placeholder="Minimo" />
-                    <asp:Button Text="Filtrar" runat="server" ID="btnFiltrar" OnClick="btnFiltrar_Click" CssClass="btn btn-primary" />
+                    <asp:Button Text="Filtrar" runat="server" ID="btnFiltrar" OnClick="btnFiltrar_Click" CssClass="btn btn-danger" />
                 </div>
                 <div class="col-6">
                     <asp:TextBox runat="server" ID="txtMaximo" CssClass="form-control mb-2" placeholder="Máximo" />
@@ -195,7 +195,7 @@
             <%} %>
         </div>
 
-
+        <a class="h5 text-decoration-none text-color-danger" href="Default2.aspx">Segunda Version Listado</a>
 
 
 

@@ -104,13 +104,16 @@ namespace negocio
 
         }
 
+  /*
+        create procedure storedListar as
+         Select A.Id, A.Codigo, Nombre, A.Descripcion, IdMarca, M.Descripcion Marca, IdCategoria, C.Descripcion AS Categoria,
+            ImagenUrl, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C Where A.IdMarca = M.Id and A.IdCategoria = C.Id
+
+*/
         // Metodo con Stored Procedure, hace lo mismo que listar, reutilizamos casi todo el codigo.
         public List<Articulo> listarConSP()
         {
-            //create procedure storedListar as
-            //Select A.Id, A.Codigo, Nombre, A.Descripcion, IdMarca, M.Descripcion Marca, IdCategoria, C.Descripcion AS Categoria, 
-            //    ImagenUrl, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C Where A.IdMarca = M.Id and A.IdCategoria = C.Id
-
+            
             List<Articulo> lista = new List<Articulo>();
 
             AccesoDatos datos = new AccesoDatos();
@@ -179,17 +182,18 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
-//        create procedure StoredAltaArticulo
-//        @codigo varchar(50),
-//        @nombre varchar(50),
-//        @desc varchar(50),
-//        @idmarca int,
-//        @idcategoria int,
-//        @img varchar(300),
-//        @precio money
-//        as 
-//        insert into ARTICULOS values(@codigo, @nombre, @desc, @idmarca, @idcategoria, @img, @precio)
+/*
+        create procedure StoredAltaArticulo
+        @codigo varchar(50),
+                @nombre varchar(50),
+                @desc varchar(50),
+                @idmarca int,
+                @idcategoria int,
+                @img varchar(300),
+                @precio money
+                as 
+                insert into ARTICULOS values(@codigo, @nombre, @desc, @idmarca, @idcategoria, @img, @precio)
+*/
         public void agregarConSP(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -212,7 +216,7 @@ namespace negocio
             }
         }
 
-              
+
         public void modificar(Articulo seleccionado)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -242,6 +246,18 @@ namespace negocio
             }
         }
 
+ /*     ALTER Procedure[dbo].[storedModificarArticulo]
+        @codigo varchar(50),
+        @nombre varchar(50),
+        @desc varchar(50),
+        @idmarca int,
+        @idcategoria int,
+        @img varchar(300),
+        @precio money,
+        @id int
+        as
+        Update ARTICULOS Set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, IdMarca = @idmarca, IdCategoria = @idcategoria, ImagenUrl = @img, Precio = @precio Where Id = @id
+ */
         public void modificarConSP(Articulo seleccionado)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -271,7 +287,7 @@ namespace negocio
             }
         }
 
-        public List<Articulo> filtrar (string campo, string criterio, string filtro)
+        public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             List<Articulo> listaFiltrada = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
@@ -279,9 +295,9 @@ namespace negocio
 
             if (campo == "Codigo")
             {
-                switch(criterio)
+                switch (criterio)
                 {
-                    case "Comienza con": 
+                    case "Comienza con":
                         consulta += "Codigo like '" + filtro + "%' ";
                         break;
 
@@ -295,9 +311,9 @@ namespace negocio
 
                 }
             }
-            else if(campo == "Nombre")
+            else if (campo == "Nombre")
             {
-                switch(criterio)
+                switch (criterio)
                 {
                     case "Comienza con":
                         consulta += "Nombre like '" + filtro + "%' ";
@@ -314,7 +330,7 @@ namespace negocio
             }
             else
             {
-                switch(criterio)
+                switch (criterio)
                 {
                     case "Comienza con":
                         consulta += "A.Descripcion like '" + filtro + "%'";
@@ -363,10 +379,10 @@ namespace negocio
 
                 throw ex;
             }
-           
 
 
-            
+
+
         }
 
         public void eliminar(int id)
@@ -589,5 +605,5 @@ namespace negocio
 
     }
 
-    
+
 }

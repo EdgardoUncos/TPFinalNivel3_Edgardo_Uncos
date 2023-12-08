@@ -67,6 +67,7 @@
     <Content Include="ArticulosLista.aspx" />
     <Content Include="Css\style.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Default2.aspx" />
     <Content Include="Detalle.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="FormularioArticulo.aspx" />
@@ -93,6 +94,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default2.aspx.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default2.aspx.designer.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Detalle.aspx.cs">
       <DependentUpon>Detalle.aspx</DependentUpon>

@@ -12,6 +12,9 @@ namespace presentacion
     public partial class Default : System.Web.UI.Page
     {
         public List<Articulo> ListaArticulos { get; set; }
+        public PaginacionRespuesta PaginacionRespuesta { get; set; }
+
+        public PaginacionViewModel PaginacionViewModel { get; set; }
 
         private void CargarRepeater(object lista)
         {
@@ -28,10 +31,46 @@ namespace presentacion
                 if (!IsPostBack)
                 {
                     ArticuloNegocio negocio = new ArticuloNegocio();
-                    ListaArticulos = negocio.listarConSP();
-                    if (Session["ListaArticulos"] == null)
-                        Session.Add("ListaArticulos", ListaArticulos);
-                    CargarRepeater(Session["ListaArticulos"]);
+
+                    //ListaArticulos = negocio.listarConSP();
+                    if (PaginacionViewModel == null)
+                        PaginacionViewModel = new PaginacionViewModel();
+
+                    if (Request.QueryString["pagina"] != null && Request.QueryString["recordsPorPagina"] != null)
+                    {
+                        PaginacionViewModel.Pagina = int.Parse(Request.QueryString["pagina"].ToString());
+                        PaginacionViewModel.RecordsPorPagina = int.Parse(Request.QueryString["recordsPorPagina"].ToString());
+                    }
+
+                    OpcionesFiltro opcionesFiltro;
+
+                    if (Session["opcionesFiltro"] != null)
+                    {
+                        opcionesFiltro = (OpcionesFiltro)Session["opcionesFiltro"];
+                        txtMinimo.Text = opcionesFiltro.precioMinimo.ToString();
+                        txtMaximo.Text = opcionesFiltro.precioMaximo.ToString();
+                        ddlCategoria.SelectedValue = opcionesFiltro.CategoriaValor.ToString();
+                        ddlMarca.SelectedValue = opcionesFiltro.MarcaValor.ToString();
+                    }
+                    else
+                        opcionesFiltro = new OpcionesFiltro();
+
+                    ListaArticulos = negocio.FiltrarAvanzado(opcionesFiltro, PaginacionViewModel);
+
+                    // El la clase que usamos en el Front
+                    PaginacionRespuesta = new PaginacionRespuesta()
+                    {
+                        Pagina = PaginacionViewModel.Pagina,
+                        RecordsPorPagina = PaginacionViewModel.RecordsPorPagina,
+                        CantidadTotalRecords = PaginacionViewModel.CantidadTotalRegistros
+                    };
+
+                    Session.Add("ListaArticulos", ListaArticulos);
+
+                    //if (Session["ListaArticulos"] == null)
+                    //    Session.Add("ListaArticulos", ListaArticulos);
+                    //CargarRepeater(Session["ListaArticulos"]);
+                    CargarRepeater(ListaArticulos);
 
                     TipoNegocio tipoNegocio = new TipoNegocio();
                     ddlCategoria.DataSource = tipoNegocio.listarCategoria();
@@ -45,9 +84,9 @@ namespace presentacion
                     ddlMarca.DataTextField = "Descripcion";
                     ddlMarca.DataValueField = "Id";
                     ddlMarca.DataBind();
+
+
                 }
-
-
 
 
             }
@@ -60,16 +99,39 @@ namespace presentacion
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            List<Articulo> ListaFiltrada = (List<Articulo>)Session["ListaArticulos"];
-            List<Articulo> ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
             try
             {
+                if (PaginacionViewModel == null)
+                    PaginacionViewModel = new PaginacionViewModel();
 
-                ListaFiltrada = Filtrar(ListaArticulos, txtMinimo.Text, txtMaximo.Text, ddlMarca.SelectedItem.ToString(), ddlCategoria.SelectedItem.ToString());
-                ListaArticulos = ListaFiltrada;
+                OpcionesFiltro opcionesFiltro = new OpcionesFiltro()
+                {
+                    precioMinimo = txtMinimo.Text,
+                    precioMaximo = txtMaximo.Text,
+                    MarcaValor = ddlMarca.SelectedValue.ToString(),
+                    CategoriaValor = ddlCategoria.SelectedValue.ToString()
+                };
+                // Trae la primera pagina segun los criterios de los controles
+                ListaArticulos = negocio.FiltrarAvanzado(opcionesFiltro, PaginacionViewModel);
 
+                if (Session["opcionesFiltro"] == null)
+                {
+                    Session.Add("opcionesFiltro", opcionesFiltro);
+                }
+                else
+                {
+                    Session["opcionesFiltro"] = opcionesFiltro;
+                }
 
-                CargarRepeater(ListaFiltrada);
+                PaginacionRespuesta = new PaginacionRespuesta()
+                {
+                    Pagina = PaginacionViewModel.Pagina,
+                    RecordsPorPagina = PaginacionViewModel.RecordsPorPagina,
+                    CantidadTotalRecords = PaginacionViewModel.CantidadTotalRegistros
+                };
+                CargarRepeater(ListaArticulos);
             }
             catch (Exception ex)
             {
@@ -81,13 +143,28 @@ namespace presentacion
 
         protected void btnReiniciar_Click(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            ListaArticulos = negocio.listarConSP();
-            Session.Add("ListaArticulos", ListaArticulos);
-            CargarRepeater(Session["ListaArticulos"]);
+            //ArticuloNegocio negocio = new ArticuloNegocio();
+            //ListaArticulos = negocio.listarConSP();
+            //Session.Add("ListaArticulos", ListaArticulos);
+            //CargarRepeater(Session["ListaArticulos"]);
 
             ddlMarca.SelectedIndex = 0;
             ddlCategoria.SelectedIndex = 0;
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            PaginacionViewModel = new PaginacionViewModel();
+            ListaArticulos = negocio.FiltrarAvanzado(new OpcionesFiltro(), PaginacionViewModel);
+
+            PaginacionRespuesta = new PaginacionRespuesta()
+            {
+                Pagina = PaginacionViewModel.Pagina,
+                RecordsPorPagina = PaginacionViewModel.RecordsPorPagina,
+                CantidadTotalRecords = PaginacionViewModel.CantidadTotalRegistros
+            };
+
+            Session["opcionesFiltro"] = null;
+
+            CargarRepeater(ListaArticulos);
         }
 
         protected void btnFavoritos_Click(object sender, EventArgs e)

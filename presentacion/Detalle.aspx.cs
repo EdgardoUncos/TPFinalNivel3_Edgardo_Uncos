@@ -55,7 +55,7 @@ namespace presentacion
                     txtNombre.Text = seleccionado.Nombre;
                     txtDescripcion.Text = seleccionado.Descripcion;
                     txtPrecio.Text = seleccionado.Precio.ToString("N2");
-                    imgArticulo.ImageUrl = seleccionado.UrlImagen;
+                    imgArticulo.ImageUrl = seleccionado.UrlImagen != null ? seleccionado.UrlImagen : "https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png";
                     
 
                     // Selecciono los desplegables

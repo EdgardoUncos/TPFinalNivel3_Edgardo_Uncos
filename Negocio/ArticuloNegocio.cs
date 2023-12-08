@@ -493,8 +493,101 @@ namespace negocio
 
         }
 
+        public int cantidadRegistros(string consulta)
+        {
+            AccesoDatos datos = new AccesoDatos();
 
-     }
+            try
+            {
+                datos.setearConsulta("select COUNT(*) " + consulta);
+
+                return datos.ejecutarAccionScalar();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        // FIltro Avanzado. Tiene la responsabilidad de entregar una lista de registros
+        // Segun las opciones de filtro y los parametros de paginacion pagina y numero de registro
+        // En linea 428 cuenta la cantidad de registros totales para calcular la cantidad de
+        // paginas, se exede de responsabilidad - estoy modificando el cod para hacerlo mas legible.
+        public List<Articulo> FiltrarAvanzado(OpcionesFiltro opcionesFiltro, PaginacionViewModel paginacion)
+        {
+            List<Articulo> listaFiltrada = new List<Articulo>();
+            string consultaBase = "select A.Id, A.Codigo, Nombre, A.Descripcion, IdMarca, M.Descripcion Marca, IdCategoria, C.Descripcion AS Categoria, ImagenUrl, Precio ";
+            string join = "from ARTICULOS A, MARCAS M, CATEGORIAS C Where A.IdMarca = M.Id and A.IdCategoria = C.Id ";
+            //string consulta = consultaBase + condicion;
+            string condicion = string.Empty;
+            string consulta = string.Empty;
+
+            if (!string.IsNullOrEmpty(opcionesFiltro.precioMinimo))
+                condicion += $" And Precio > {opcionesFiltro.precioMinimo}";
+
+            if (!string.IsNullOrEmpty(opcionesFiltro.precioMaximo))
+                condicion += $" And Precio < {opcionesFiltro.precioMaximo}";
+
+            if (!string.IsNullOrEmpty(opcionesFiltro.MarcaValor))
+                condicion += $" And IdMarca = {opcionesFiltro.MarcaValor}";
+
+            if (!string.IsNullOrEmpty(opcionesFiltro.CategoriaValor))
+                condicion += $" And IdCategoria = {opcionesFiltro.CategoriaValor}";
+
+
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                //datos.setearConsulta("select COUNT(*) " + join + condicion);
+
+                // Corregir esta linea
+                //paginacion.CantidadTotalRegistros = datos.ejecutarAccionScalar();
+                paginacion.CantidadTotalRegistros = cantidadRegistros(join + condicion);
+
+                datos.cerrarConexion();
+
+                consulta = consultaBase + join + condicion;
+                consulta += $" Order By Id OFFSET {paginacion.RecordsASaltar} Rows Fetch Next {paginacion.RecordsPorPagina} ROWS ONLY";
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+
+                    aux.Id = int.Parse(datos.Lector["Id"].ToString());
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                    aux.Marca = new Tipo();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.Categoria = new Tipo();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    listaFiltrada.Add(aux);
+                }
+
+                return listaFiltrada;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+
+    }
 
     
 }

@@ -3,53 +3,58 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row">
-        <div class="col-6">
 
-            <div class="mb-3">
-                <label class="form-label">Codigo</label>
-                <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
-            </div>
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-sm-6">
 
-            <div class="mb-3">
-                <label class="form-label">Marca</label>
-                <asp:DropDownList runat="server" ID="ddlMarca" CssClass="form-select">
-                </asp:DropDownList>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Categoria</label>
-                <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-select">
-                </asp:DropDownList>
-            </div>
-         </div>   
-            <div class="col-6">
-                <div class="mb-3">
-                    <label class="form-label">Descripcion</label>
-                    <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" />
+                    <div class="mb-3">
+                        <label class="form-label">Codigo</label>
+                        <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Marca</label>
+                        <asp:DropDownList runat="server" ID="ddlMarca" CssClass="form-select">
+                        </asp:DropDownList>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Categoria</label>
+                        <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-select">
+                        </asp:DropDownList>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Precio</label>
-                    <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" />
-                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="mb-3">
+                        <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Precio</label>
+                        <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" />
+                    </div>
 
-                <div style="max-height: 300px;">
-                    <asp:Image ImageUrl="https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png" ID="imgArticulo" Height="300px" runat="server" />
+                    <div style="height: 200px; margin-right:auto; margin-left:auto">
+                        <asp:Image ImageUrl="https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png" ID="imgArticulo" runat="server" Height="200px" />
+                    </div>
                 </div>
+                
             </div>
 
+        </div>
     </div>
     <div class="row mb-3">
         <div class="col-12 text-center">
             <a href="Default.aspx" class="btn btn-secondary">Regresar</a>
         </div>
 
-    </div>            
+    </div>
 </asp:Content>
-                    
 
 
-        
+
+

@@ -6,6 +6,7 @@ html {
     /*overflow: hidden;*/
     margin: 0;
     padding: 0;
+   
 }
 
 html {
@@ -49,9 +50,7 @@ form {
     background-color: green;
 }
 
-.carrousel{
-    max-width: 200px;
-}
+
 
 /*Why isn't 100% height and 100% width working in my ASPX page?
 

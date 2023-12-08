@@ -65,7 +65,7 @@
 
             </div>
             <%} %>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-12">
                     <asp:GridView runat="server" ID="dgvArticulosLista" CssClass="table table-striped" AutoGenerateColumns="false"
                         OnSelectedIndexChanged="dgvArticulosLista_SelectedIndexChanged" DataKeyNames="Id" AllowPaging="true" PageSize="5" OnPageIndexChanging="dgvArticulosLista_PageIndexChanging">

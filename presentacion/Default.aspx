@@ -119,7 +119,7 @@
                         <div class="col">
                             <div class="card text-center">
                                 <div style="height: 60%;">
-                                    <img src="<%#Eval("UrlImagen") %>" class="card-img-top rounded-start" onerror="this.onerror=null; this.src='Images/placeholder.jpg'" alt="..." />
+                                    <img src="<%#Eval("UrlImagen") %>" class="card-img-top py-2 rounded-start" onerror="this.onerror=null; this.src='Images/placeholder.jpg'" alt="..." />
                                 </div>
 
                                 <div class="card-body">

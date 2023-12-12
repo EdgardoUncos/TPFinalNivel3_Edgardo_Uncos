@@ -16,8 +16,14 @@ Envio de emails
 - SQL Server
 - Procedimientos almacenados
 - Envios de emails
+- Filtro de busqueda
+- Paginacion
 
 ---
+Te invito a ver el proyecto, alojado en Somee, link http
+
+[Link Somee](http://www.catalogowebdb.somee.com)
+
 ### Algunas Imagenes
 
 <table>
